@@ -19,7 +19,8 @@ export default function Home() {
     <div className="flex flex-col items-center text-center bg-background text-foreground">
       
           {/* Hero Section */}
-          <section id="hero" className="min-h-screen flex flex-col justify-center items-center">
+          <section id="hero" className="min-h-screen flex flex-col justify-start items-center  mt-20">
+
          
             <motion.h1
               initial={{ scale: 0, opacity: 0 }}
@@ -54,7 +55,7 @@ export default function Home() {
           About Me
         </motion.h2> 
      
-        <p className="text-lg text-gray-400 mb-8">
+        <p className="text-lg text-gray-400 mb-10">
         <span>
             I have been coding for about four years, focusing extensively on both frontend and backend development. I specialize in React, Next.js, and Tailwind CSS, and I have a command of modern web technologies, including Three.js and Framer Motion for animations. I can build responsive and visually impressive websites with a smooth user experience.
           </span>
@@ -79,7 +80,7 @@ export default function Home() {
           initial={{ opacity: 0, scale: 0.1 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 2 }}
-          className="text-4xl font-bold mb-8"
+          className="text-4xl font-bold mb-10"
         >
           Skills
         </motion.h2>
