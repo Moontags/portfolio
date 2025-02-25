@@ -16,7 +16,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col items-center text-center bg-background text-foreground">
+    <div className="flex flex-col items-center text-center bg-background text-foreground mx-1">
       
           {/* Hero Section */}
           <section id="hero" className="min-h-screen flex flex-col justify-start items-center mt-36">
