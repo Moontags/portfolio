@@ -177,7 +177,7 @@ export default function Home() {
           initial={{ scale: 0.1, opacity: 0, rotate: 0 }}
           animate={{ scale: 1, opacity: 1, rotate: 360 }}
           transition={{ duration: 1, ease: "easeInOut" }}
-          className="relative flex flex-col items-center text-gray-600 p-8 sm:px-12 max-w-3xl w-full mx-auto text-center"
+          className="relative flex flex-col items-center text-gray-400 p-8 sm:px-12 max-w-3xl w-full mx-auto text-center"
         >
           <div className="flex flex-col justify-center items-center gap-10">
             
