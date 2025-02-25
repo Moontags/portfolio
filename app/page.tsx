@@ -19,7 +19,7 @@ export default function Home() {
     <div className="flex flex-col items-center text-center bg-background text-foreground">
       
           {/* Hero Section */}
-          <section id="hero" className="min-h-screen flex flex-col justify-start items-center  mt-20">
+          <section id="hero" className="min-h-screen flex flex-col justify-start items-center  mt-30">
 
          
             <motion.h1
