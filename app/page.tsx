@@ -4,8 +4,10 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const projects = [
-  { title: "Weather App", description: "Shows current weather.", image: "/w1.png", link: "https://moontags.github.io/Weather_App/" },
-  { title: "Task Manager", description: "Task management tool.", image: "/todo.png", link: "https://todo-task-09nf.onrender.com" },
+  { title: "Weather App", description: "current weather API", image: "/w1.png", link: "https://moontags.github.io/Weather_App/" },
+  { title: "Task Manager", description: "Task management PHP", image: "/todo.png", link: "https://todo-task-09nf.onrender.com" },
+  { title: "Todo app", description: "Todo app next.js", image: "/todo1.png", link: "https://todo-lake-nine-41.vercel.app/" },
+  { title: "Living a Healthy Life", description: "React & Tailwind", image: "/eeva.png", link: "https://www.eevakoskela.fi/" },
 ];
 
 export default function Home() {
