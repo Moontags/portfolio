@@ -8,6 +8,7 @@ const projects = [
   { title: "Task Manager", description: "Task management PHP", image: "/todo.png", link: "https://todo-task-09nf.onrender.com" },
   { title: "Todo app", description: "Todo app next.js", image: "/todo1.png", link: "https://todo-lake-nine-41.vercel.app/" },
   { title: "Living a Healthy Life", description: "React & Tailwind", image: "/eeva.png", link: "https://www.eevakoskela.fi/" },
+  { title: "Cleaning Made Easy", description: "HTML & CSS", image: "/siivousote.png", link: "https://moontags.github.io/siivousote/" },
 ];
 
 export default function Home() {
