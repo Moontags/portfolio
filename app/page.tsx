@@ -4,12 +4,13 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const projects = [
+  { title: "Taitaja", description: "Typescipt, Vercel", image: "/rent.png", link: "https://taitaja.vercel.app/" },
   { title: "Lakes of Finland", description: "HTML,CSS & JavaScript", image: "/jarvi.png", link: "https://moontags.github.io/Finnish_Lakes-_Gallery/" },
   { title: "Todo app", description: "Todo app next.js", image: "/todo1.png", link: "https://todo-lake-nine-41.vercel.app/" },
   { title: "Living a Healthy Life", description: "React & Tailwind", image: "/eeva.png", link: "https://www.eevakoskela.fi/" },
   { title: "Cleaning Made Easy", description: "HTML & CSS", image: "/siivousote.png", link: "https://moontags.github.io/siivousote/" },
   { title: "Weather App", description: "current weather API", image: "/w1.png", link: "https://moontags.github.io/Weather_App/" },
-  { title: "RentXpress", description: "Laravel,AWS & EC2", image: "/rent.png", link: "https://vuokraamo.koodari.net/" },
+
 
 ];
 
