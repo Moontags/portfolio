@@ -4,12 +4,12 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const projects = [
-  { title: "Taitaja", description: "Typescipt, Vercel", image: "/taitaja.png", link: "https://taitaja.vercel.app/" },
-  { title: "Living a Healthy Life", description: "React & Tailwind", image: "/eeva.png", link: "https://www.eevakoskela.fi/" },
-  { title: "Cleaning Made Easy", description: "HTML & CSS", image: "/siivousote.png", link: "https://moontags.github.io/siivousote/" },
-  { title: "Lakes of Finland", description: "HTML,CSS & JavaScript", image: "/jarvi.png", link: "https://moontags.github.io/Finnish_Lakes-_Gallery/" },
-  { title: "Weather App", description: "current weather API", image: "/w1.png", link: "https://moontags.github.io/Weather_App/" },
-  { title: "Todo app", description: "Todo app next.js", image: "/todo1.png", link: "https://todo-lake-nine-41.vercel.app/" },
+  { title: "Quiz Master", description: "A school project and a quiz application built with Next.js and TypeScript. The application fetches quiz questions from a JSON file and providing responsive user experience. Hosted on Vercel.", image: "/taitaja.png", link: "https://taitaja.vercel.app/" },
+  { title: "Living a Healthy Life", description: " A client website built with React to showcase services offered by a wellness professional. The site features a responsive design and Hosted on Louhi.", image: "/eeva.png", link: "https://www.eevakoskela.fi/" },
+  { title: "Cleaning Made Easy", description: "A static website for a cleaning service company. Technologies: HTML, CSS and hosted on Github pages", image: "/siivousote.png", link: "https://moontags.github.io/siivousote/" },
+  { title: "Lakes of Finland", description: "A web application that displays a gallery of Finnish lakes. The project focuses on using JavaScript to create an interactive user experience, including image manipulation and dynamic content loading.", image: "/jarvi.png", link: "https://moontags.github.io/Finnish_Lakes-_Gallery/" },
+  { title: "Weather App", description: "A web application that fetches real-time weather data using a third-party API. The app demonstrates the ability to handle API requests and dynamically display information to the user.", image: "/w1.png", link: "https://moontags.github.io/Weather_App/" },
+  { title: "Todo app", description: "A task management application built with Next.js. This project showcases the ability to create, edit, and delete tasks, demonstrating fundamental CRUD operations.", image: "/todo1.png", link: "https://todo-lake-nine-41.vercel.app/" },
 
 
 ];
@@ -32,7 +32,7 @@ export default function Home() {
               initial={{ scale: 0, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
               transition={{ duration: 1 }}
-              className="text-5xl font-bold"
+              className="text-5xl font-bold mb-6"
             >
               Welcome!
             </motion.h1>
@@ -42,10 +42,10 @@ export default function Home() {
               whileInView={{ scale: 1, opacity: 1, rotate: 720 }}
               transition={{ repeatType: "reverse", duration: 2, ease: "linear" }}
             >
-              <Image src="/earth.png" alt="Rotating Earth" width={600} height={600} className="rounded-full" />
+              <Image src="/jari.jpg" alt="Rotating Earth" width={220} height={200} className="rounded-md" />
             </motion.div>
 
-            <p className="text-lg text-gray-400 mt-4 mx-4">
+            <p className="text-lg text-gray-400 mt-6 mx-4">
               to see my portfolio and travel as a developer.
             </p>
           </section>
@@ -101,8 +101,6 @@ export default function Home() {
               <span className="block">TypeScript</span>
               <span className="block">React</span>
               <span className="block">Next.js</span>
-              <span className="block">WordPress</span>
-              <span className="block">AJAX</span>
             </div>
           </div>
 
@@ -127,6 +125,7 @@ export default function Home() {
               <span className="block">MySQL</span>
               <span className="block">MongoDB</span>
               <span className="block">PostgreSQL</span>
+              <span className="block">Supabase</span>
             </div>
           </div>
 
@@ -139,8 +138,6 @@ export default function Home() {
               <span className="block">Vercel</span>
               <span className="block">Hostinger</span>
               <span className="block">AWS</span>
-              <span className="block">Heroku</span>
-              <span className="block">Netlify</span>
               <span className="block">Postman</span>
             </div>
           </div>
@@ -173,7 +170,7 @@ export default function Home() {
           initial={{ opacity: 0, scale: 0.1 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 2 }}
-          className="text-4xl font-bold mb-6"
+          className="text-4xl font-bold mt-10"
         >
           Projects
         </motion.h2>
