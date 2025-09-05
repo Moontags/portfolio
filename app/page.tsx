@@ -32,7 +32,7 @@ export default function Home() {
               initial={{ scale: 0, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
               transition={{ duration: 1 }}
-              className="text-5xl font-bold mb-6"
+              className="text-3xl font-bold"
             >
               Welcome!
             </motion.h1>
@@ -42,10 +42,10 @@ export default function Home() {
               whileInView={{ scale: 1, opacity: 1, rotate: 720 }}
               transition={{ repeatType: "reverse", duration: 2, ease: "linear" }}
             >
-              <Image src="/jari.jpg" alt="Rotating Earth" width={220} height={200} className="rounded-md" />
+              <Image src="/me.png" alt="Rotating Earth" width={360} height={300} className="rounded-md mt-16" />
             </motion.div>
 
-            <p className="text-lg text-gray-400 mt-6 mx-4">
+            <p className="text-lg text-gray-400 mt-12 mx-4">
               to see my portfolio and travel as a developer.
             </p>
           </section>
