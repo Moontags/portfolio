@@ -15,7 +15,7 @@ const headerTranslations = {
 };
 
 export default function Header() {
-  const { language } = useLanguage(); // Haetaan kieli contextista
+  const { language } = useLanguage(); 
   const t = headerTranslations[language];
 
   return (

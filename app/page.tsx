@@ -39,7 +39,7 @@ const translations = {
   },
   fi: {
     welcome: "Tervetuloa!",
-    portfolioText: "nähdäksesi portfolioni ja matkani kehittäjänä.",
+    portfolioText: "nähdäksesi portfolioni ja matkani ohjelmisokehittäjänä.",
     about: "Tietoa minusta",
     aboutText1: "Olen syksyllä 2025 Salon ammattiopistosta valmistunut ohjelmistokehittäjä. Kokemusta ohjelmoinnista on kertynyt koulutuksen projekteista sekä oman yritystoiminnan kautta. Tällä hetkellä syvennän osaamistani tekoälyn soveltamisessa ohjelmistokehityksessä ja sen opettamisessa datan avulla. Olen motivoitunut kehittämään taitojani jatkuvasti. Harrastuksiini kuuluu triathlon ja musiikki.",
     aboutText2: "Erityisosaamistani on full-stack-verkkosovellusten kehittäminen suunnittelusta ja testauksesta ylläpitoon. Hallitsen ohjelmointikieliä ja teknologioita, kuten JavaScript, TypeScript, PHP, Python, Node.js, React, Laravel ja C#. Olen toteuttanut projekteja Next.js:llä, Express.js:llä, WebSocketsilla ja Prismalla, sekä rakentanut RESTful- ja GraphQL-rajapintoja.",
@@ -72,7 +72,7 @@ const translations = {
 
 export default function Home() {
   const [currentProject, setCurrentProject] = useState(0);
-  const { language, toggleLanguage } = useLanguage(); // Käytetään LanguageContext hookia
+  const { language, toggleLanguage } = useLanguage(); 
 
   const t = translations[language];
 
@@ -92,15 +92,14 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center text-center bg-background text-foreground mx-1">
       
-      {/* Napit oikeassa yläkulmassa */}
+     
       <div className="fixed top-4 right-4 sm:right-10 md:right-20 lg:right-40 z-50 flex items-center gap-2 sm:gap-3">
         
-        {/* Kielivaihtonappi - käyttää nyt LanguageContext hookia */}
         <motion.button
           onClick={toggleLanguage}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
-          className="p-2 sm:p-3 rounded-full bg-transparent dark:bg-black/10 backdrop-blur-sm shadow-lg hover:bg-white/40 dark:hover:bg-black/50 transition-all"
+          className="p-2 sm:p-3 rounded-full bg-transparent dark:bg-black/10 backdrop-blur-sm shadow-md hover:bg-white/40 dark:hover:bg-black/50 transition-all"
           aria-label="Change language"
         >
           <span className="text-xl sm:text-2xl">
@@ -108,14 +107,13 @@ export default function Home() {
           </span>
         </motion.button>
 
-        {/* Tumma/Vaalea tila -nappi */}
         <motion.button
           onClick={() => {
             document.documentElement.classList.toggle('dark');
           }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
-          className="p-2 sm:p-3 rounded-full bg-transparent dark:bg-black/30 backdrop-blur-sm shadow-lg hover:bg-white/40 dark:hover:bg-black/50 transition-all"
+          className="p-2 sm:p-3 rounded-full bg-transparent dark:bg-black/30 backdrop-blur-sm shadow-md hover:bg-white/40 dark:hover:bg-black/50 transition-all"
           aria-label="Toggle dark mode"
         >
           <span className="text-xl sm:text-2xl">
