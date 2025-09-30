@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // Käännökset
 const translations = {
@@ -71,7 +72,7 @@ const translations = {
 
 export default function Home() {
   const [currentProject, setCurrentProject] = useState(0);
-  const [language, setLanguage] = useState<"en" | "fi">("en");
+  const { language, toggleLanguage } = useLanguage(); // Käytetään LanguageContext hookia
 
   const t = translations[language];
 
@@ -88,22 +89,18 @@ export default function Home() {
     setCurrentProject((prev) => (prev + 1) % projects.length);
   };
 
-  const toggleLanguage = () => {
-    setLanguage(prev => prev === "en" ? "fi" : "en");
-  };
-
   return (
     <div className="flex flex-col items-center text-center bg-background text-foreground mx-1">
       
       {/* Napit oikeassa yläkulmassa */}
-      <div className="fixed top-4 right-4 z-50 flex items-center gap-2 sm:gap-3">
+      <div className="fixed top-4 right-4 sm:right-10 md:right-20 lg:right-40 z-50 flex items-center gap-2 sm:gap-3">
         
-        {/* Kielivaihtonappi */}
+        {/* Kielivaihtonappi - käyttää nyt LanguageContext hookia */}
         <motion.button
           onClick={toggleLanguage}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
-          className="p-2 sm:p-3 rounded-full bg-white/20 dark:bg-black/30 backdrop-blur-sm shadow-lg hover:bg-white/40 dark:hover:bg-black/50 transition-all"
+          className="p-2 sm:p-3 rounded-full bg-transparent dark:bg-black/10 backdrop-blur-sm shadow-lg hover:bg-white/40 dark:hover:bg-black/50 transition-all"
           aria-label="Change language"
         >
           <span className="text-xl sm:text-2xl">
@@ -118,7 +115,7 @@ export default function Home() {
           }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
-          className="p-2 sm:p-3 rounded-full bg-white/20 dark:bg-black/30 backdrop-blur-sm shadow-lg hover:bg-white/40 dark:hover:bg-black/50 transition-all"
+          className="p-2 sm:p-3 rounded-full bg-transparent dark:bg-black/30 backdrop-blur-sm shadow-lg hover:bg-white/40 dark:hover:bg-black/50 transition-all"
           aria-label="Toggle dark mode"
         >
           <span className="text-xl sm:text-2xl">
@@ -145,7 +142,7 @@ export default function Home() {
           whileInView={{ scale: 1, opacity: 1, rotate: 720 }}
           transition={{ repeatType: "reverse", duration: 2, ease: "linear" }}
         >
-          <Image src="/me.png" alt="Profile" width={360} height={300} className="rounded-md mt-16" />
+          <Image src="/me.png" alt="Profile" width={360} height={300} className="rounded-full mt-16" />
         </motion.div>
 
         <p className="text-lg text-gray-400 mt-12 mx-4">
@@ -295,7 +292,7 @@ export default function Home() {
             </p>
 
             <div className="flex gap-8 w-full justify-center">
-                            <motion.a
+              <motion.a
                 href={projects[currentProject].link}
                 target="_blank"
                 rel="noopener noreferrer"

@@ -1,20 +1,39 @@
 "use client";
-// ...existing code...
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const headerTranslations = {
+  en: {
+    about: "About",
+    skills: "Skills",
+    projects: "Projects",
+  },
+  fi: {
+    about: "Tietoja",
+    skills: "Osaaminen",
+    projects: "Projekteja",
+  }
+};
 
 export default function Header() {
-  // ...existing code...
+  const { language } = useLanguage(); // Haetaan kieli contextista
+  const t = headerTranslations[language];
 
   return (
     <header className="top-0 left-0 w-full bg-white/10 dark:bg-transparent z-50">
       <div className="max-w-6xl mx-auto px-8 py-6 flex justify-between items-center">
 
         <nav className="flex space-x-6 text-xl font-semibold">
-          <a href="#about" className="hover:text-blue-500 dark:hover:text-blue-400">About</a>
-          <a href="#skills" className="hover:text-blue-500 dark:hover:text-blue-400">Skills</a>
-          <a href="#projects" className="hover:text-blue-500 dark:hover:text-blue-400">Projects</a>
+          <a href="#about" className="hover:text-blue-500 dark:hover:text-blue-400">
+            {t.about}
+          </a>
+          <a href="#skills" className="hover:text-blue-500 dark:hover:text-blue-400">
+            {t.skills}
+          </a>
+          <a href="#projects" className="hover:text-blue-500 dark:hover:text-blue-400">
+            {t.projects}
+          </a>
         </nav>
 
-        {/* ...existing code... */}
       </div>
     </header>
   );
