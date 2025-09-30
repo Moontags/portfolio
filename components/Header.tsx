@@ -19,10 +19,10 @@ export default function Header() {
   const t = headerTranslations[language];
 
   return (
-    <header className="top-0 left-0 w-full bg-white/10 dark:bg-transparent z-50 sm:display-none">
+    <header className="top-0 left-0 w-full bg-white/10 dark:bg-transparent z-50">
       <div className="max-w-6xl mx-auto px-8 py-6 flex justify-between items-center">
 
-        <nav className="flex space-x-6 text-xl font-semibold">
+        <nav className="flex space-x-3 sm:space-x-8 text-xl sm:text-2xl font-semibold">
           <a href="#about" className="hover:text-blue-500 dark:hover:text-blue-400">
             {t.about}
           </a>
