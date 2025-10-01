@@ -138,7 +138,7 @@ export default function Home() {
         <motion.div
           initial={{ scale: 0, opacity: 0, rotate: 0 }}
           whileInView={{ scale: 1, opacity: 1, rotate: 720 }}
-          transition={{ repeatType: "reverse", duration: 2, ease: "linear" }}
+          transition={{ repeatType: "reverse", duration: 1, ease: "linear" }}
         >
           <Image src="/me.png" alt="Profile" width={360} height={300} className="rounded-full mt-16" />
         </motion.div>
