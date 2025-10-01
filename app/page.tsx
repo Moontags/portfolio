@@ -93,7 +93,7 @@ export default function Home() {
     <div className="flex flex-col items-center text-center bg-background text-foreground mx-1">
       
      
-      <div className="fixed top-4 right-4 sm:right-10 md:right-20 lg:right-40 z-50 flex items-center gap-4 sm:gap-6">
+      <div className="fixed top-6 right-4 sm:right-10 md:right-20 lg:right-40 z-50 flex items-center gap-4 sm:gap-6">
         
         <motion.button
           onClick={toggleLanguage}
