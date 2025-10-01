@@ -93,13 +93,13 @@ export default function Home() {
     <div className="flex flex-col items-center text-center bg-background text-foreground mx-1">
       
      
-      <div className="fixed top-4 right-4 sm:right-10 md:right-20 lg:right-40 z-50 flex items-center gap-2 sm:gap-3">
+      <div className="fixed top-4 right-4 sm:right-10 md:right-20 lg:right-40 z-50 flex items-center gap-4 sm:gap-6">
         
         <motion.button
           onClick={toggleLanguage}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
-          className="p-2 sm:p-3 rounded-full bg-transparent dark:bg-black/10 backdrop-blur-sm shadow-md hover:bg-white/40 dark:hover:bg-black/50 transition-all"
+          className="p-1.5 sm:p-2 rounded-full bg-transparent dark:bg-black/10 backdrop-blur-sm shadow-md hover:bg-white/40 dark:hover:bg-black/50 transition-all"
           aria-label="Change language"
         >
           <span className="text-xl sm:text-2xl">
@@ -113,7 +113,7 @@ export default function Home() {
           }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
-          className="p-2 sm:p-3 rounded-full bg-transparent dark:bg-black/30 backdrop-blur-sm shadow-md hover:bg-white/40 dark:hover:bg-black/50 transition-all"
+          className="p-1.5 sm:p-2 rounded-full bg-transparent dark:bg-black/30 backdrop-blur-sm shadow-md hover:bg-white/40 dark:hover:bg-black/50 transition-all"
           aria-label="Toggle dark mode"
         >
           <span className="text-xl sm:text-2xl">
@@ -125,7 +125,7 @@ export default function Home() {
       </div>
 
       {/* Hero Section */}
-      <section id="hero" className="min-h-screen flex flex-col justify-start items-center mt-36">
+      <section id="hero" className="min-h-screen flex flex-col justify-start items-center mt-12 md:mt-56 sm:mt-36">
         <motion.h1
           initial={{ scale: 0, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
