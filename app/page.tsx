@@ -79,7 +79,7 @@ export default function Home() {
   const projects = [
     { title: t.project1Title, description: t.project1Desc, image: "/taitaja.png", link: "https://taitaja.vercel.app/" },
     { title: t.project2Title, description: t.project2Desc, image: "/eeva.png", link: "https://www.eevakoskela.fi/" },
-    { title: t.project3Title, description: t.project3Desc, image: "/f1.png", link: "https://f1-finland-git-main-jaris-projects-ed391ebc.vercel.app/" },
+    { title: t.project3Title, description: t.project3Desc, image: "/f1.png", link: "https://f1-finland.vercel.app/" },
     { title: t.project4Title, description: t.project4Desc, image: "/jarvi.png", link: "https://moontags.github.io/Finnish_Lakes-_Gallery/" },
     { title: t.project5Title, description: t.project5Desc, image: "/w1.png", link: "https://moontags.github.io/Weather_App/" },
     { title: t.project6Title, description: t.project6Desc, image: "/todo1.png", link: "https://todo-lake-nine-41.vercel.app/" },
