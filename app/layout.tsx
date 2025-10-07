@@ -1,6 +1,6 @@
 "use client";
 import { ThemeProvider } from "next-themes";
-import Header from "@/components/Header";
+// import Header from "@/components/Header";
 import "./globals.css";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 
@@ -11,7 +11,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         
         <LanguageProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <Header />
+            {/* <Header /> */}
             <main className="flex-grow">{children}</main>
           </ThemeProvider>
         </LanguageProvider>

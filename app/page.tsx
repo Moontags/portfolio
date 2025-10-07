@@ -1,8 +1,31 @@
 "use client";
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, createContext, useContext, ReactNode, useEffect, useMemo } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { Menu, X, Github, Linkedin, Mail, Download, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
-import { useLanguage } from "@/contexts/LanguageContext";
+
+// Language Context
+interface LanguageContextType {
+  language: 'fi' | 'en';
+  toggleLanguage: () => void;
+}
+
+const LanguageContext = createContext<LanguageContextType>({ 
+  language: 'fi', 
+  toggleLanguage: () => {} 
+});
+
+const useLanguage = () => useContext(LanguageContext);
+
+const LanguageProvider = ({ children }: { children: ReactNode }) => {
+  const [language, setLanguage] = useState<'fi' | 'en'>('fi');
+  const toggleLanguage = () => setLanguage(prev => prev === 'fi' ? 'en' : 'fi');
+  return (
+    <LanguageContext.Provider value={{ language, toggleLanguage }}>
+      {children}
+    </LanguageContext.Provider>
+  );
+};
 
 // Käännökset
 const translations = {
@@ -22,8 +45,13 @@ const translations = {
     projectManagement: "Project Management & Collaboration:",
     graphicDesign: "Graphic Design:",
     projects: "Projects",
+    contact: "Contact",
+    contactText: "Interested in working together? Feel free to reach out!",
+    sendMessage: "Send Message",
     viewButton: "View",
     nextButton: "Next",
+    prevButton: "Previous",
+    downloadCV: "Download CV",
     project1Title: "Quiz Master",
     project1Desc: "A school project and a quiz application built with Next.js and TypeScript. The application fetches quiz questions from a JSON file and providing responsive user experience. Hosted on Vercel.",
     project2Title: "Living a Healthy Life",
@@ -53,8 +81,13 @@ const translations = {
     projectManagement: "Projektinhallinta & Yhteistyö:",
     graphicDesign: "Graafinen suunnittelu:",
     projects: "Projektit",
+    contact: "Yhteystiedot",
+    contactText: "Kiinnostunut yhteistyöstä? Ota rohkeasti yhteyttä!",
+    sendMessage: "Lähetä viesti",
     viewButton: "Katso",
     nextButton: "Seuraava",
+    prevButton: "Edellinen",
+    downloadCV: "Lataa CV",
     project1Title: "Tietovisailumestari",
     project1Desc: "Kouluprojekti ja tietovisailusovellus rakennettu Next.js:llä ja TypeScriptillä. Sovellus hakee kysymykset JSON-tiedostosta tarjoten responsiivisen käyttökokemuksen. Isännöity Vercelissä.",
     project2Title: "Terveellinen elämä",
@@ -70,259 +103,648 @@ const translations = {
   }
 };
 
-export default function Home() {
+function Portfolio() {
   const [currentProject, setCurrentProject] = useState(0);
-  const { language, toggleLanguage } = useLanguage(); 
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("hero");
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+  const { language, toggleLanguage } = useLanguage();
 
   const t = translations[language];
 
   const projects = [
-    { title: t.project1Title, description: t.project1Desc, image: "/taitaja.png", link: "https://taitaja.vercel.app/" },
-    { title: t.project2Title, description: t.project2Desc, image: "/eeva.png", link: "https://www.eevakoskela.fi/" },
-    { title: t.project3Title, description: t.project3Desc, image: "/f1.png", link: "https://f1-finland.vercel.app/" },
-    { title: t.project4Title, description: t.project4Desc, image: "/jarvi.png", link: "https://moontags.github.io/Finnish_Lakes-_Gallery/" },
-    { title: t.project5Title, description: t.project5Desc, image: "/w1.png", link: "https://moontags.github.io/Weather_App/" },
-    { title: t.project6Title, description: t.project6Desc, image: "/todo1.png", link: "https://todo-lake-nine-41.vercel.app/" },
+    { title: t.project1Title, description: t.project1Desc, image: "🎯", link: "https://taitaja.vercel.app/" },
+    { title: t.project2Title, description: t.project2Desc, image: "🌿", link: "https://www.eevakoskela.fi/" },
+    { title: t.project3Title, description: t.project3Desc, image: "🏎️", link: "https://f1-finland.vercel.app/" },
+    { title: t.project4Title, description: t.project4Desc, image: "🏞️", link: "https://moontags.github.io/Finnish_Lakes-_Gallery/" },
+    { title: t.project5Title, description: t.project5Desc, image: "🌤️", link: "https://moontags.github.io/Weather_App/" },
+    { title: t.project6Title, description: t.project6Desc, image: "✅", link: "https://todo-lake-nine-41.vercel.app/" },
   ];
+
+  const sections = useMemo(() => ["hero", "about", "skills", "projects", "contact"], []);
+
+  // Smooth scroll function
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      setMobileMenuOpen(false);
+    }
+  };
+
+  // Track active section
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + window.innerHeight / 2;
+      
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Touch handlers for swipe
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStart - touchEnd > 75) {
+      // Swipe left - next project
+      nextProject();
+    }
+    if (touchStart - touchEnd < -75) {
+      // Swipe right - previous project
+      prevProject();
+    }
+  };
 
   const nextProject = () => {
     setCurrentProject((prev) => (prev + 1) % projects.length);
   };
 
+  const prevProject = () => {
+    setCurrentProject((prev) => (prev - 1 + projects.length) % projects.length);
+  };
+
+  const { scrollYProgress } = useScroll();
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
   return (
-    <div className="flex flex-col items-center text-center bg-background text-foreground mx-1">
-      
-     
-      <div className="fixed top-6 right-4 sm:right-10 md:right-20 lg:right-40 z-50 flex items-center gap-4 sm:gap-6">
+    <div className="relative">
+      {/* Parallax Background */}
+      <motion.div 
+        style={{ y: backgroundY }}
+        className="fixed inset-0 -z-10 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800"
+      />
+
+      <div className="flex flex-col items-center text-center text-gray-900 dark:text-white mx-1 transition-colors duration-300">
         
-        <motion.button
-          onClick={toggleLanguage}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-          className="p-1.5 sm:p-2 rounded-full bg-transparent dark:bg-black/10 backdrop-blur-sm shadow-md hover:bg-white/40 dark:hover:bg-black/50 transition-all"
-          aria-label="Change language"
-        >
-          <span className="text-xl sm:text-2xl">
-            {language === "en" ? "🇫🇮" : "🇬🇧"}
-          </span>
-        </motion.button>
-
-        <motion.button
-          onClick={() => {
-            document.documentElement.classList.toggle('dark');
-          }}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-          className="p-1.5 sm:p-2 rounded-full bg-transparent dark:bg-black/30 backdrop-blur-sm shadow-md hover:bg-white/40 dark:hover:bg-black/50 transition-all"
-          aria-label="Toggle dark mode"
-        >
-          <span className="text-xl sm:text-2xl">
-            <span className="dark:hidden">🌙</span>
-            <span className="hidden dark:inline">☀️</span>
-          </span>
-        </motion.button>
-        
-      </div>
-
-      {/* Hero Section */}
-      <section id="hero" className="min-h-screen flex flex-col justify-start items-center mt-12 md:mt-56 sm:mt-36">
-        <motion.h1
-          initial={{ scale: 0, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1 }}
-          className="text-3xl font-bold"
-        >
-          {t.welcome}
-        </motion.h1>
-
-        <motion.div
-          initial={{ scale: 0, opacity: 0, rotate: 0 }}
-          whileInView={{ scale: 1, opacity: 1, rotate: 720 }}
-          transition={{ repeatType: "reverse", duration: 1, ease: "linear" }}
-        >
-          <Image src="/me.png" alt="Profile" width={360} height={300} className="rounded-full mt-16" />
-        </motion.div>
-
-        <p className="text-lg text-gray-400 mt-12 mx-4">
-          {t.portfolioText}
-        </p>
-      </section>
-
-      {/* About Section */}
-      <section id="about" className="min-h-screen flex flex-col justify-center px-6 max-w-3xl text-left">
-        <motion.h2
-          initial={{ opacity: 0, scale: 0.1 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 2 }}
-          className="text-4xl font-bold mb-8"
-        >
-          {t.about}
-        </motion.h2> 
-     
-        <p className="text-lg text-gray-400 mb-10">
-          <span>{t.aboutText1}</span>
-          <br /><br />
-          <span>{t.aboutText2}</span>
-          <br /><br />
-          <span>{t.aboutText3}</span>
-          <br /><br />
-          <span>{t.aboutText4}</span>
-        </p>
-      </section>
-
-      {/* Skills Section */}
-      <section id="skills" className="min-h-screen flex flex-col justify-center px-6 max-w-3xl text-left">
-        <motion.h2
-          initial={{ opacity: 0, scale: 0.1 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 2 }}
-          className="text-4xl font-bold mb-10"
-        >
-          {t.skills}
-        </motion.h2>
-
-        <div className="text-lg text-gray-400 text-left">
-          <h3 className="text-foreground font-semibold mb-2">{t.frontendTech}</h3>
-          <div className="flex flex-wrap gap-2">
-            <span className="block">HTML</span>
-            <span className="block">CSS</span>
-            <span className="block">Tailwind CSS</span>
-            <span className="block">JavaScript</span>
-            <span className="block">TypeScript</span>
-            <span className="block">React</span>
-            <span className="block">Next.js</span>
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-white/80 dark:bg-black/40 backdrop-blur-md rounded-full px-8 py-4 shadow-lg">
+          <div className="flex items-center gap-8">
+            {sections.map((section) => (
+              <button
+                key={section}
+                onClick={() => scrollToSection(section)}
+                className={`text-base font-medium transition-colors capitalize ${
+                  activeSection === section 
+                    ? "text-blue-600 dark:text-blue-400" 
+                    : "text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+                }`}
+              >
+                {section === "hero" ? "Home" : section}
+              </button>
+            ))}
           </div>
+        </nav>
+
+        {/* Mobile Navigation */}
+        <div className="md:hidden fixed top-4 left-4 z-50">
+          <motion.button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            className="p-3 rounded-full bg-white/80 dark:bg-black/40 backdrop-blur-md shadow-lg"
+          >
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </motion.button>
         </div>
 
-        <div className="text-lg text-gray-400 text-left mt-6">
-          <h3 className="text-foreground font-semibold mb-2">{t.backendTech}</h3>
-          <div className="flex flex-wrap gap-2">
-            <span className="block">PHP</span>
-            <span className="block">C#</span>
-            <span className="block">Docker</span>
-            <span className="block">Python</span>
-            <span className="block">Node.js</span>
-            <span className="block">Drupal</span>
-            <span className="block">Laravel</span>
-            <span className="block">Express</span>
-            <span className="block">Flask</span>
-          </div>
-        </div>
-
-        <div className="text-lg text-gray-400 text-left mt-6">
-          <h3 className="text-foreground font-semibold mb-2">{t.databases}</h3>
-          <div className="flex flex-wrap gap-2">
-            <span className="block">MySQL</span>
-            <span className="block">MongoDB</span>
-            <span className="block">PostgreSQL</span>
-            <span className="block">Supabase</span>
-          </div>
-        </div>
-
-        <div className="text-lg text-gray-400 text-left mt-6">
-          <h3 className="text-foreground font-semibold mb-2">{t.versionControl}</h3>
-          <div className="flex flex-wrap gap-2">
-            <span className="block">GitHub</span>
-            <span className="block">GitHub Actions</span>
-            <span className="block">GitLens</span>
-            <span className="block">Vercel</span>
-            <span className="block">Hostinger</span>
-            <span className="block">AWS</span>
-            <span className="block">Postman</span>
-          </div>
-        </div>
-
-        <div className="text-lg text-gray-400 text-left mt-6">
-          <h3 className="text-foreground font-semibold mb-2">{t.projectManagement}</h3>
-          <div className="flex flex-wrap gap-2">
-            <span className="block">Scrum</span>
-            <span className="block">Trello</span>
-            <span className="block">Slack</span>
-          </div>
-        </div>
-
-        <div className="text-lg text-gray-400 text-left mt-6">
-          <h3 className="text-foreground font-semibold mb-2">{t.graphicDesign}</h3>
-          <div className="flex flex-wrap gap-2">
-            <span className="block">Figma</span>
-            <span className="block">Photoshop</span>
-            <span className="block">Premiere</span>
-            <span className="block">Illustrator</span>
-            <span className="block">Draw.io</span>
-            <span className="block">Canva</span>
-          </div>
-        </div>
-      </section>
-
-      {/* Projects Section */}
-      <section id="projects" className="min-h-screen flex flex-col justify-center px-6 max-w-3xl">
-        <motion.h2
-          initial={{ opacity: 0, scale: 0.1 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 2 }}
-          className="text-4xl font-bold mt-10"
-        >
-          {t.projects}
-        </motion.h2>
-
-        <motion.div
-          key={currentProject}
-          initial={{ scale: 0.1, opacity: 0, rotate: 0 }}
-          animate={{ scale: 1, opacity: 1, rotate: 360 }}
-          transition={{ duration: 1, ease: "easeInOut" }}
-          className="relative flex flex-col items-center text-gray-400 p-8 sm:px-12 max-w-3xl w-full mx-auto text-center"
-        >
-          <div className="flex flex-col justify-center items-center gap-10">
-            
-            <div className="flex items-center justify-center w-60 h-40 sm:w-80 sm:h-52 lg:w-[420px] lg:h-[280px] overflow-hidden">
-              <Image
-                src={projects[currentProject].image}
-                alt={projects[currentProject].title}
-                width={420}
-                height={280}
-                className="object-contain w-full h-full rounded-bl-full rounded-tr-full"
-              />
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: -100 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -100 }}
+            className="md:hidden fixed top-20 left-4 z-40 bg-white/95 dark:bg-black/95 backdrop-blur-md rounded-2xl p-6 shadow-xl"
+          >
+            <div className="flex flex-col gap-4">
+              {sections.map((section) => (
+                <button
+                  key={section}
+                  onClick={() => scrollToSection(section)}
+                  className={`text-left text-lg font-medium transition-colors capitalize ${
+                    activeSection === section 
+                      ? "text-blue-600 dark:text-blue-400" 
+                      : "text-gray-600 dark:text-gray-300"
+                  }`}
+                >
+                  {section === "hero" ? "Home" : section}
+                </button>
+              ))}
             </div>
+          </motion.div>
+        )}
 
-            <h2 className="text-2xl lg:text-3xl font-semibold">{projects[currentProject].title}</h2>
-            <p className="text-md lg:text-lg text-center max-w-2xl px-4">
-              {projects[currentProject].description}
+        {/* Header Controls */}
+        <div className="fixed top-4 right-4 sm:right-10 z-50 flex items-center gap-3">
+          <motion.button
+            onClick={toggleLanguage}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            className="p-2 sm:p-2.5 rounded-full bg-white/80 dark:bg-black/40 backdrop-blur-md shadow-lg hover:bg-white/90 dark:hover:bg-black/50 transition-all"
+            aria-label="Change language"
+          >
+            <span className="text-xl sm:text-2xl">
+              {language === "en" ? "🇫🇮" : "🇬🇧"}
+            </span>
+          </motion.button>
+
+          <motion.button
+            onClick={() => {
+              document.documentElement.classList.toggle('dark');
+            }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            className="p-2 sm:p-2.5 rounded-full bg-white/80 dark:bg-black/40 backdrop-blur-md shadow-lg hover:bg-white/90 dark:hover:bg-black/50 transition-all"
+            aria-label="Toggle dark mode"
+          >
+            <span className="text-xl sm:text-2xl">
+              <span className="dark:hidden">🌙</span>
+              <span className="hidden dark:inline">☀️</span>
+            </span>
+          </motion.button>
+        </div>
+
+        {/* Section Indicators */}
+        <div className="hidden lg:flex fixed right-8 top-1/2 -translate-y-1/2 z-50 flex-col gap-4">
+          {sections.map((section) => (
+            <button
+              key={section}
+              onClick={() => scrollToSection(section)}
+              className={`w-3 h-3 rounded-full transition-all ${
+                activeSection === section 
+                  ? "bg-blue-600 dark:bg-blue-400 scale-125" 
+                  : "bg-gray-300 dark:bg-gray-600 hover:bg-blue-400"
+              }`}
+              aria-label={`Go to ${section}`}
+            />
+          ))}
+        </div>
+
+        {/* Hero Section */}
+        <motion.section 
+          id="hero" 
+          className="min-h-screen flex flex-col justify-center items-center px-4 pt-20"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          <motion.h1
+            initial={{ scale: 0, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1 }}
+            className="text-3xl sm:text-4xl md:text-5xl font-bold"
+          >
+            {t.welcome}
+          </motion.h1>
+
+          <motion.div
+            initial={{ scale: 0, opacity: 0, rotate: 0 }}
+            whileInView={{ scale: 1, opacity: 1, rotate: 720 }}
+            viewport={{ once: true }}
+            transition={{ repeatType: "reverse", duration: 1, ease: "linear" }}
+          >
+            <Image 
+              src="/jari.jpg" 
+              alt="Profile" 
+              width={400}
+              height={400}
+              className="w-36 h-36 sm:w-48 sm:h-48 md:w-60 md:h-60 lg:w-72 lg:h-72 rounded-full mt-8 shadow-2xl object-cover" 
+            />
+          </motion.div>
+
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 mt-8 mx-4 max-w-2xl">
+            {t.portfolioText}
+          </p>
+        </motion.section>
+
+        {/* About Section */}
+        <motion.section 
+          id="about" 
+          className="min-h-screen flex flex-col justify-center px-4 sm:px-6 max-w-3xl text-left py-20"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+        >
+          <motion.h2
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-3xl sm:text-4xl font-bold mb-6 sm:mb-8"
+          >
+            {t.about}
+          </motion.h2> 
+     
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 mb-10 leading-relaxed">
+              <span>{t.aboutText1}</span>
+              <br /><br />
+              <span>{t.aboutText2}</span>
+              <br /><br />
+              <span>{t.aboutText3}</span>
+              <br /><br />
+              <span>{t.aboutText4}</span>
             </p>
+          </motion.div>
+        </motion.section>
 
-            <div className="flex gap-8 w-full justify-center">
-              <motion.a
-                href={projects[currentProject].link}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                className="text-lg px-6 py-2 
-                          bg-white/20 dark:bg-black/30 backdrop-blur-sm
-                          text-gray-500 dark:text-white rounded-full shadow-md
-                          transition-all duration-300 ease-in-out 
-                          hover:bg-white/40 dark:hover:bg-black/10 
-                          hover:shadow-xl hover:brightness-125 
-                          active:shadow-md"
-              >
-                {t.viewButton}
-              </motion.a>
+        {/* Skills Section */}
+        <motion.section 
+          id="skills" 
+          className="min-h-screen flex flex-col justify-center px-4 sm:px-6 max-w-3xl text-left py-20"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+        >
+          <motion.h2
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-3xl sm:text-4xl font-bold mb-8 sm:mb-10"
+          >
+            {t.skills}
+          </motion.h2>
 
-              <motion.button
-                onClick={nextProject}
-                whileHover={{ scale: 1.05 }}
-                className="text-lg px-6 py-2 
-                          bg-white/20 dark:bg-black/30 backdrop-blur-sm
-                          text-gray-500 dark:text-white rounded-full shadow-md
-                          transition-all duration-300 ease-in-out 
-                          hover:bg-white/40 dark:hover:bg-black/10 
-                          hover:shadow-xl hover:brightness-125 
-                          active:shadow-md"
-              >
-                {t.nextButton}
-              </motion.button>
+          <motion.div 
+            className="text-base sm:text-lg text-gray-600 dark:text-gray-400 text-left"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            <h3 className="text-gray-900 dark:text-white font-semibold mb-3">{t.frontendTech}</h3>
+            <div className="flex flex-wrap gap-2">
+              {["HTML", "CSS", "Tailwind CSS", "JavaScript", "TypeScript", "React", "Next.js"].map((skill, i) => (
+                <motion.span 
+                  key={skill}
+                  initial={{ opacity: 0, scale: 0 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.05 }}
+                  whileHover={{ scale: 1.1, backgroundColor: "rgba(59, 130, 246, 0.1)" }}
+                  className="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 rounded-full text-sm sm:text-base transition-all cursor-default"
+                >
+                  {skill}
+                </motion.span>
+              ))}
             </div>
+          </motion.div>
+
+          <motion.div 
+            className="text-base sm:text-lg text-gray-600 dark:text-gray-400 text-left mt-6"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <h3 className="text-gray-900 dark:text-white font-semibold mb-3">{t.backendTech}</h3>
+            <div className="flex flex-wrap gap-2">
+              {["PHP", "C#", "Docker", "Python", "Node.js", "Drupal", "Laravel", "Express", "Flask"].map((skill, i) => (
+                <motion.span 
+                  key={skill}
+                  initial={{ opacity: 0, scale: 0 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.05 }}
+                  whileHover={{ scale: 1.1, backgroundColor: "rgba(59, 130, 246, 0.1)" }}
+                  className="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 rounded-full text-sm sm:text-base transition-all cursor-default"
+                >
+                  {skill}
+                </motion.span>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div 
+            className="text-base sm:text-lg text-gray-600 dark:text-gray-400 text-left mt-6"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <h3 className="text-gray-900 dark:text-white font-semibold mb-3">{t.databases}</h3>
+            <div className="flex flex-wrap gap-2">
+              {["MySQL", "MongoDB", "PostgreSQL", "Supabase"].map((skill, i) => (
+                <motion.span 
+                  key={skill}
+                  initial={{ opacity: 0, scale: 0 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.05 }}
+                  whileHover={{ scale: 1.1, backgroundColor: "rgba(59, 130, 246, 0.1)" }}
+                  className="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 rounded-full text-sm sm:text-base transition-all cursor-default"
+                >
+                  {skill}
+                </motion.span>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div 
+            className="text-base sm:text-lg text-gray-600 dark:text-gray-400 text-left mt-6"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <h3 className="text-gray-900 dark:text-white font-semibold mb-3">{t.versionControl}</h3>
+            <div className="flex flex-wrap gap-2">
+              {["GitHub", "GitHub Actions", "GitLens", "Vercel", "Hostinger", "AWS", "Postman"].map((skill, i) => (
+                <motion.span 
+                  key={skill}
+                  initial={{ opacity: 0, scale: 0 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.05 }}
+                  whileHover={{ scale: 1.1, backgroundColor: "rgba(59, 130, 246, 0.1)" }}
+                  className="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 rounded-full text-sm sm:text-base transition-all cursor-default"
+                >
+                  {skill}
+                </motion.span>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div 
+            className="text-base sm:text-lg text-gray-600 dark:text-gray-400 text-left mt-6"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+          >
+            <h3 className="text-gray-900 dark:text-white font-semibold mb-3">{t.projectManagement}</h3>
+            <div className="flex flex-wrap gap-2">
+              {["Scrum", "Trello", "Slack"].map((skill, i) => (
+                <motion.span 
+                  key={skill}
+                  initial={{ opacity: 0, scale: 0 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.05 }}
+                  whileHover={{ scale: 1.1, backgroundColor: "rgba(59, 130, 246, 0.1)" }}
+                  className="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 rounded-full text-sm sm:text-base transition-all cursor-default"
+                >
+                  {skill}
+                </motion.span>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div 
+            className="text-base sm:text-lg text-gray-600 dark:text-gray-400 text-left mt-6"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
+            <h3 className="text-gray-900 dark:text-white font-semibold mb-3">{t.graphicDesign}</h3>
+            <div className="flex flex-wrap gap-2">
+              {["Figma", "Photoshop", "Premiere", "Illustrator", "Draw.io", "Canva"].map((skill, i) => (
+                <motion.span 
+                  key={skill}
+                  initial={{ opacity: 0, scale: 0 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.05 }}
+                  whileHover={{ scale: 1.1, backgroundColor: "rgba(59, 130, 246, 0.1)" }}
+                  className="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 rounded-full text-sm sm:text-base transition-all cursor-default"
+                >
+                  {skill}
+                </motion.span>
+              ))}
+            </div>
+          </motion.div>
+        </motion.section>
+
+        {/* Projects Section */}
+        <motion.section 
+          id="projects" 
+          className="min-h-screen flex flex-col justify-center px-4 sm:px-6 max-w-4xl py-20"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+        >
+          <motion.h2
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-3xl sm:text-4xl font-bold mb-8"
+          >
+            {t.projects}
+          </motion.h2>
+
+          <motion.div
+            key={currentProject}
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="relative flex flex-col items-center text-gray-600 dark:text-gray-400 p-6 sm:p-8 max-w-3xl w-full mx-auto text-center bg-white/50 dark:bg-black/20 backdrop-blur-sm rounded-3xl shadow-xl"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
+            <div className="flex flex-col justify-center items-center gap-6 sm:gap-8">
+              
+              <div className="flex items-center justify-center w-48 h-32 sm:w-64 sm:h-40 lg:w-80 lg:h-52 overflow-hidden">
+                <div className="text-6xl sm:text-7xl lg:text-9xl">{projects[currentProject].image}</div>
+              </div>
+
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-900 dark:text-white">
+                {projects[currentProject].title}
+              </h3>
+              
+              <p className="text-sm sm:text-base lg:text-lg text-center max-w-2xl px-2 sm:px-4">
+                {projects[currentProject].description}
+              </p>
+
+              {/* Project Navigation */}
+              <div className="flex items-center gap-4 w-full justify-center mt-4">
+                <motion.button
+                  onClick={prevProject}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="p-2 sm:p-3 rounded-full bg-white/60 dark:bg-black/40 backdrop-blur-sm shadow-md hover:bg-white/80 dark:hover:bg-black/60 transition-all"
+                  aria-label={t.prevButton}
+                >
+                  <ChevronLeft size={20} className="sm:w-6 sm:h-6" />
+                </motion.button>
+
+                <div className="flex gap-4 sm:gap-6">
+                  <motion.a
+                    href={projects[currentProject].link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.05 }}
+                    className="text-sm sm:text-base px-4 sm:px-6 py-2 
+                              bg-white/60 dark:bg-black/40 backdrop-blur-sm
+                              text-gray-700 dark:text-white rounded-full shadow-md
+                              transition-all duration-300 ease-in-out 
+                              hover:bg-blue-500 hover:text-white dark:hover:bg-blue-600 
+                              hover:shadow-xl active:shadow-md"
+                  >
+                    {t.viewButton}
+                  </motion.a>
+                </div>
+
+                <motion.button
+                  onClick={nextProject}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="p-2 sm:p-3 rounded-full bg-white/60 dark:bg-black/40 backdrop-blur-sm shadow-md hover:bg-white/80 dark:hover:bg-black/60 transition-all"
+                  aria-label={t.nextButton}
+                >
+                  <ChevronRight size={20} className="sm:w-6 sm:h-6" />
+                </motion.button>
+              </div>
+
+              {/* Project Indicators */}
+              <div className="flex gap-2 mt-2">
+                {projects.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentProject(index)}
+                    className={`w-2 h-2 rounded-full transition-all ${
+                      index === currentProject 
+                        ? "bg-blue-600 dark:bg-blue-400 w-8" 
+                        : "bg-gray-300 dark:bg-gray-600"
+                    }`}
+                    aria-label={`Go to project ${index + 1}`}
+                  />
+                ))}
+              </div>
+
+              <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-500 mt-2">
+                {currentProject + 1} / {projects.length}
+              </p>
+            </div>
+          </motion.div>
+        </motion.section>
+
+        {/* Contact Section */}
+        <motion.section 
+          id="contact" 
+          className="min-h-screen flex flex-col justify-center px-4 sm:px-6 max-w-3xl text-center py-20"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+        >
+          <motion.h2
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-3xl sm:text-4xl font-bold mb-6 sm:mb-8"
+          >
+            {t.contact}
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-base sm:text-lg text-gray-600 dark:text-gray-400 mb-8 sm:mb-12"
+          >
+            {t.contactText}
+          </motion.p>
+
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mb-8 sm:mb-12">
+            <motion.a
+              href="https://github.com/moontags"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1, y: -5 }}
+              className="flex items-center gap-3 px-6 py-3 bg-white/60 dark:bg-black/40 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all"
+            >
+              <Github size={24} />
+              <span className="font-medium">GitHub</span>
+            </motion.a>
+
+            <motion.a
+              href="https://www.linkedin.com/in/jari-peltola-25b416153/"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1, y: -5 }}
+              className="flex items-center gap-3 px-6 py-3 bg-white/60 dark:bg-black/40 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all"
+            >
+              <Linkedin size={24} />
+              <span className="font-medium">LinkedIn</span>
+            </motion.a>
+
+            <motion.a
+              href="jena9988@gmail.com"
+              whileHover={{ scale: 1.1, y: -5 }}
+              className="flex items-center gap-3 px-6 py-3 bg-white/60 dark:bg-black/40 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all"
+            >
+              <Mail size={24} />
+              <span className="font-medium">Email</span>
+            </motion.a>
           </div>
-        </motion.div>
-      </section>
+
+          <motion.a
+            href="/cv.pdf"
+            download
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center gap-3 px-8 py-4 bg-blue-600 dark:bg-blue-500 text-white rounded-full shadow-lg hover:shadow-xl hover:bg-blue-700 dark:hover:bg-blue-600 transition-all font-semibold text-base sm:text-lg"
+          >
+            <Download size={24} />
+            {t.downloadCV}
+          </motion.a>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="mt-16 pt-8 border-t border-gray-300 dark:border-gray-700"
+          >
+            <p className="text-sm text-gray-500 dark:text-gray-500">
+              © 2025 Portfolio. Made with ❤️ using Next.js & Framer Motion
+            </p>
+          </motion.div>
+        </motion.section>
+      </div>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <LanguageProvider>
+      <Portfolio />
+    </LanguageProvider>
   );
 }
