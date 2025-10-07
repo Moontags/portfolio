@@ -704,7 +704,7 @@ function Portfolio() {
             </motion.a>
 
             <motion.a
-              href="jena9988@gmail.com"
+              href="mailto:jena9988@gmail.com"
               whileHover={{ scale: 1.1, y: -5 }}
               className="flex items-center gap-3 px-6 py-3 bg-white/60 dark:bg-black/40 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all"
             >
