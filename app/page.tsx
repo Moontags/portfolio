@@ -183,8 +183,13 @@ function Portfolio() {
     setCurrentProject((prev) => (prev - 1 + projects.length) % projects.length);
   };
 
-  const { scrollYProgress } = useScroll();
+   const { scrollYProgress } = useScroll();
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
+  // Set light mode as default on mount  
+  useEffect(() => {                        
+    document.documentElement.classList.remove('dark'); 
+  }, []);                                  
 
   return (
     <div className="relative">
