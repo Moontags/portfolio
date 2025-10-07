@@ -10,7 +10,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-screen flex flex-col transition-colors duration-300">
         
         <LanguageProvider>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
             {/* <Header /> */}
             <main className="flex-grow">{children}</main>
           </ThemeProvider>
