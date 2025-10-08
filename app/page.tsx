@@ -310,43 +310,51 @@ function Portfolio() {
         </div>
 
         {/* Hero Section */}
-        <motion.section 
-          id="hero" 
-          className="min-h-screen flex flex-col justify-center items-center px-4 pt-20 -mt-10"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
-          <motion.h1
-            initial={{ scale: 0, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1 }}
-            className="text-3xl sm:text-4xl md:text-5xl font-bold"
+                  <motion.section 
+            id="hero" 
+            className="
+              min-h-screen flex flex-col justify-center items-center px-4
+              pt-10 sm:pt-16 md:pt-20
+              -mt-4 sm:-mt-6 md:-mt-10
+            "
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
           >
-            {t.welcome}
-          </motion.h1>
+            <motion.h1
+              initial={{ scale: 0, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1 }}
+              className="text-3xl sm:text-4xl md:text-5xl font-bold"
+            >
+              {t.welcome}
+            </motion.h1>
 
-          <motion.div
-            initial={{ scale: 0, opacity: 0, rotate: 0 }}
-            whileInView={{ scale: 1, opacity: 1, rotate: 720 }}
-            viewport={{ once: true }}
-            transition={{ repeatType: "reverse", duration: 1, ease: "linear" }}
-          >
-            <Image 
-              src="/jari.jpg" 
-              alt="Profile" 
-              width={400}
-              height={400}
-              className="w-36 h-36 sm:w-48 sm:h-48 md:w-60 md:h-60 lg:w-72 lg:h-72 rounded-full mt-12 shadow-2xl object-cover" 
-            />
-          </motion.div>
+            <motion.div
+              initial={{ scale: 0, opacity: 0, rotate: 0 }}
+              whileInView={{ scale: 1, opacity: 1, rotate: 720 }}
+              viewport={{ once: true }}
+              transition={{ repeatType: 'reverse', duration: 1, ease: 'linear' }}
+            >
+              <Image 
+                src="/jari.jpg" 
+                alt="Profile" 
+                width={400}
+                height={400}
+                className="
+                  w-32 h-32 sm:w-44 sm:h-44 md:w-60 md:h-60 lg:w-72 lg:h-72
+                  rounded-full mt-10 sm:mt-12 shadow-2xl object-cover
+                " 
+              />
+            </motion.div>
 
-          <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 mt-16 mx-4 max-w-2xl">
-            {t.portfolioText}
-          </p>
-        </motion.section>
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 mt-12 sm:mt-16 mx-4 max-w-2xl text-center">
+              {t.portfolioText}
+            </p>
+          </motion.section>
+
 
         {/* About Section */}
         <motion.section 
