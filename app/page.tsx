@@ -314,7 +314,7 @@ function Portfolio() {
         {/* Hero Section */}
         <motion.section 
           id="hero" 
-          className="min-h-screen flex flex-col justify-center items-center px-4 pt-20"
+          className="min-h-screen flex flex-col justify-center items-center px-4 pt-30"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
@@ -325,7 +325,7 @@ function Portfolio() {
             whileInView={{ scale: 1, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1 }}
-            className="text-3xl sm:text-4xl md:text-5xl font-bold"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-10 sm:mb-12"
           >
             {t.welcome}
           </motion.h1>
@@ -345,7 +345,7 @@ function Portfolio() {
             />
           </motion.div>
 
-          <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 mt-8 mx-4 max-w-2xl">
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 mt-16 mx-4 max-w-2xl">
             {t.portfolioText}
           </p>
         </motion.section>
