@@ -606,52 +606,60 @@ function Portfolio() {
                 {projects[currentProject].description}
               </p>
 
-              {/* Project Navigation */}
-                        <div className="flex items-center gap-4 w-full justify-center mt-4">
-              {/* Vasemman nuolen nappi */}
-              <motion.button
-                onClick={prevProject}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                className="p-3 sm:p-4 rounded-full bg-white/70 dark:bg-black/50 
-                          backdrop-blur-sm shadow-md hover:bg-white/90 
-                          dark:hover:bg-black/70 transition-all"
-                aria-label={t.prevButton}
-              >
-                <ChevronLeft size={24} className="sm:w-7 sm:h-7" />
-              </motion.button>
-
-              {/* Keskimmäinen "View" -nappi */}
-              <div className="flex gap-4 sm:gap-6">
-                <motion.a
-                  href={projects[currentProject].link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.05 }}
-                  className="text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-3 
-                            bg-white/70 dark:bg-black/50 backdrop-blur-sm
-                            text-gray-800 dark:text-white rounded-full shadow-md
-                            transition-all duration-300 ease-in-out 
-                            hover:bg-blue-500 hover:text-white dark:hover:bg-blue-600 
-                            hover:shadow-xl active:shadow-md"
+            {/* Project Navigation */}
+              <div className="flex items-center gap-4 w-full justify-center mt-4">
+                {/* Vasemman nuolen nappi */}
+                <motion.button
+                  onClick={prevProject}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="p-3 sm:p-4 rounded-full bg-white/70 dark:bg-black/50 
+                            backdrop-blur-sm shadow-md hover:bg-white/90 
+                            dark:hover:bg-black/70 transition-all"
+                  aria-label={t.prevButton}
                 >
-                  {t.viewButton}
-                </motion.a>
-              </div>
+                  <ChevronLeft size={24} className="sm:w-7 sm:h-7" />
+                </motion.button>
 
-              {/* Oikean nuolen nappi */}
-              <motion.button
-                onClick={nextProject}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                className="p-3 sm:p-4 rounded-full bg-white/70 dark:bg-black/50 
-                          backdrop-blur-sm shadow-md hover:bg-white/90 
-                          dark:hover:bg-black/70 transition-all"
-                aria-label={t.nextButton}
-              >
-                <ChevronRight size={24} className="sm:w-7 sm:h-7" />
-              </motion.button>
-            </div>
+                {/* Keskimmäinen "View" -nappi */}
+                <div className="flex gap-4 sm:gap-6">
+                  <motion.a
+                    href={projects[currentProject].link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={(e) => {
+                      // Varmistetaan että linkki on validi
+                      if (!projects[currentProject].link) {
+                        e.preventDefault();
+                        alert('Projekti ei ole vielä saatavilla');
+                      }
+                    }}
+                    className="text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-3 
+                              bg-white/70 dark:bg-black/50 backdrop-blur-sm
+                              text-gray-800 dark:text-white rounded-full shadow-md
+                              transition-all duration-300 ease-in-out 
+                              hover:bg-blue-500 hover:text-white dark:hover:bg-blue-600 
+                              hover:shadow-xl active:shadow-md cursor-pointer"
+                  >
+                    {t.viewButton}
+                  </motion.a>
+                </div>
+
+                {/* Oikean nuolen nappi */}
+                <motion.button
+                  onClick={nextProject}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="p-3 sm:p-4 rounded-full bg-white/70 dark:bg-black/50 
+                            backdrop-blur-sm shadow-md hover:bg-white/90 
+                            dark:hover:bg-black/70 transition-all"
+                  aria-label={t.nextButton}
+                >
+                  <ChevronRight size={24} className="sm:w-7 sm:h-7" />
+                </motion.button>
+              </div>
 
 
               {/* Project Indicators */}
