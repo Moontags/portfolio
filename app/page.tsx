@@ -606,7 +606,7 @@ function Portfolio() {
               <div className="flex items-center gap-8 sm:gap-8 w-full justify-center mt-4">
                 <motion.button
                   onClick={prevProject}
-                  // **KORJAUS:** Estää kosketuksen leviäminen, jotta painike toimii mobiilissa
+                  // Korjaus: Estää kosketuksen leviäminen, jotta painike toimii mobiilissa
                   onTouchStart={(e) => e.stopPropagation()} 
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
@@ -621,7 +621,8 @@ function Portfolio() {
                     href={projects[currentProject].link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    // **HUOM:** Tähän ei tarvita onTouchStart, sillä se on ankkurielementti (a)
+                    // **TÄMÄ ON UUSI KORJAUS** Estää kosketuksen leviäminen, jotta linkki toimii mobiilissa
+                    onTouchStart={(e) => e.stopPropagation()}
                     whileHover={{ scale: 1.05 }}
                     className="text-base sm:text-base px-6 sm:px-6 py-2.5 
                               bg-white/60 dark:bg-black/40 backdrop-blur-sm
@@ -636,7 +637,7 @@ function Portfolio() {
 
                 <motion.button
                   onClick={nextProject}
-                  // **KORJAUS:** Estää kosketuksen leviäminen, jotta painike toimii mobiilissa
+                  // Korjaus: Estää kosketuksen leviäminen, jotta painike toimii mobiilissa
                   onTouchStart={(e) => e.stopPropagation()} 
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
