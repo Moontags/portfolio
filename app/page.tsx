@@ -163,21 +163,23 @@ function Portfolio() {
   // Touch handlers for swipe
   const handleTouchStart = (e: React.TouchEvent) => {
     setTouchStart(e.targetTouches[0].clientX);
+    setTouchEnd(e.targetTouches[0].clientX); // Reset touchEnd on start
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX);
+    // Only update touchEnd on move
     setTouchEnd(e.targetTouches[0].clientX);
   };
 
   const handleTouchEnd = () => {
      const swipeDistance = touchStart - touchEnd;
-    if (touchStart - touchEnd > 75) {
-      // Swipe left - next project
+     
+     // Korjattu logiikka pyyhkäisyeleille
+     if (swipeDistance > 75) {
+      // Swipe left (touchStart > touchEnd) - next project
       nextProject();
-    }
-     if (Math.abs(swipeDistance) > 75) {
-      // Swipe right - previous project
+    } else if (swipeDistance < -75) {
+      // Swipe right (touchStart < touchEnd) - previous project
       prevProject();
     }
   };
@@ -604,6 +606,8 @@ function Portfolio() {
               <div className="flex items-center gap-8 sm:gap-8 w-full justify-center mt-4">
                 <motion.button
                   onClick={prevProject}
+                  // **KORJAUS:** Estää kosketuksen leviäminen, jotta painike toimii mobiilissa
+                  onTouchStart={(e) => e.stopPropagation()} 
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   className="p-3 sm:p-3 rounded-full bg-white/60 dark:bg-black/40 backdrop-blur-sm shadow-md hover:bg-white/80 dark:hover:bg-black/60 transition-all"
@@ -617,6 +621,7 @@ function Portfolio() {
                     href={projects[currentProject].link}
                     target="_blank"
                     rel="noopener noreferrer"
+                    // **HUOM:** Tähän ei tarvita onTouchStart, sillä se on ankkurielementti (a)
                     whileHover={{ scale: 1.05 }}
                     className="text-base sm:text-base px-6 sm:px-6 py-2.5 
                               bg-white/60 dark:bg-black/40 backdrop-blur-sm
@@ -631,6 +636,8 @@ function Portfolio() {
 
                 <motion.button
                   onClick={nextProject}
+                  // **KORJAUS:** Estää kosketuksen leviäminen, jotta painike toimii mobiilissa
+                  onTouchStart={(e) => e.stopPropagation()} 
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   className="p-3 sm:p-3 rounded-full bg-white/60 dark:bg-black/40 backdrop-blur-sm shadow-md hover:bg-white/80 dark:hover:bg-black/60 transition-all"
@@ -672,12 +679,13 @@ function Portfolio() {
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
+
           <motion.h2
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-3xl sm:text-4xl font-bold mb-6 sm:mb-8"
+            className="text-3xl sm:text-4xl font-bold mb-8"
           >
             {t.contact}
           </motion.h2>
@@ -687,67 +695,81 @@ function Portfolio() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-base sm:text-lg text-gray-600 dark:text-gray-400 mb-8 sm:mb-12"
+            className="text-base sm:text-lg text-gray-600 dark:text-gray-400 mb-10 max-w-xl mx-auto"
           >
             {t.contactText}
           </motion.p>
-
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mb-8 sm:mb-12">
-            <motion.a
-              href="https://github.com/moontags"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.1, y: -5 }}
-              className="flex items-center gap-3 px-6 py-3 bg-white/60 dark:bg-black/40 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all"
-            >
-              <Github size={24} />
-              <span className="font-medium">GitHub</span>
-            </motion.a>
-
-            <motion.a
-              href="https://www.linkedin.com/in/jari-peltola-25b416153/"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.1, y: -5 }}
-              className="flex items-center gap-3 px-6 py-3 bg-white/60 dark:bg-black/40 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all"
-            >
-              <Linkedin size={24} />
-              <span className="font-medium">LinkedIn</span>
-            </motion.a>
-
-            <motion.a
-              href="mailto:jena9988@gmail.com"
-              whileHover={{ scale: 1.1, y: -5 }}
-              className="flex items-center gap-3 px-6 py-3 bg-white/60 dark:bg-black/40 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all"
-            >
-              <Mail size={24} />
-              <span className="font-medium">Email</span>
-            </motion.a>
-          </div>
-
-          <motion.a
-            href="/cv.pdf"
-            download
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-3 px-8 py-4 bg-blue-600 dark:bg-blue-500 text-white rounded-full shadow-lg hover:shadow-xl hover:bg-blue-700 dark:hover:bg-blue-600 transition-all font-semibold text-base sm:text-lg"
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="flex flex-col sm:flex-row gap-6 justify-center"
           >
-            <Download size={24} />
-            {t.downloadCV}
-          </motion.a>
+            
+            <motion.a
+              href="mailto:sinun@sahkopostisi.com" 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="flex items-center justify-center gap-2 px-8 py-3 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 transition-all"
+            >
+              <Mail size={20} />
+              {t.sendMessage}
+            </motion.a>
+
+            <motion.a
+              href="https://github.com/Moontags"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="flex items-center justify-center gap-2 px-8 py-3 bg-gray-700 text-white rounded-full shadow-lg hover:bg-gray-800 transition-all dark:bg-gray-300 dark:text-gray-900 dark:hover:bg-gray-400"
+            >
+              <Github size={20} />
+              GitHub
+            </motion.a>
+
+          </motion.div>
 
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="mt-16 pt-8 border-t border-gray-300 dark:border-gray-700"
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="flex flex-col sm:flex-row gap-6 justify-center mt-6"
           >
-            <p className="text-sm text-gray-500 dark:text-gray-500">
-              © 2025 Portfolio. Made with ❤️ using Next.js & Framer Motion
-            </p>
+            <motion.a
+              href="https://www.linkedin.com/in/jarisalmi/"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="flex items-center justify-center gap-2 px-8 py-3 bg-blue-800 text-white rounded-full shadow-lg hover:bg-blue-900 transition-all"
+            >
+              <Linkedin size={20} />
+              LinkedIn
+            </motion.a>
+            
+            <motion.a
+              href="/Jari_Salmi_CV.pdf"
+              download
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="flex items-center justify-center gap-2 px-8 py-3 border border-gray-400 dark:border-gray-500 text-gray-700 dark:text-gray-300 rounded-full shadow-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all"
+            >
+              <Download size={20} />
+              {t.downloadCV}
+            </motion.a>
           </motion.div>
+
         </motion.section>
+
+        {/* Footer */}
+        <footer className="w-full text-center text-xs py-8 border-t border-gray-200 dark:border-gray-700 mt-auto">
+          <p>&copy; {new Date().getFullYear()} Jari Peltola. All rights reserved.</p>
+        </footer>
+
       </div>
     </div>
   );
