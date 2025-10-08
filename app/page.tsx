@@ -310,50 +310,50 @@ function Portfolio() {
         </div>
 
         {/* Hero Section */}
-                  <motion.section 
-            id="hero" 
-            className="
-              min-h-screen flex flex-col justify-center items-center px-4
-              pt-10 sm:pt-16 md:pt-20
-              -mt-4 sm:-mt-6 md:-mt-10
-            "
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-          >
-            <motion.h1
-              initial={{ scale: 0, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1 }}
-              className="text-3xl sm:text-4xl md:text-5xl font-bold"
+            <motion.section 
+              id="hero" 
+              className="min-h-screen flex flex-col justify-center items-center px-4 pt-20 -mt-6 sm:-mt-8 md:-mt-12 lg:-mt-16"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
             >
-              {t.welcome}
-            </motion.h1>
+              <motion.h1
+                initial={{ scale: 0.95, opacity: 0, y: 10 }}
+                whileInView={{ scale: 1, opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="text-3xl sm:text-4xl md:text-5xl font-bold text-center"
+              >
+                {t.welcome}
+              </motion.h1>
 
-            <motion.div
-              initial={{ scale: 0, opacity: 0, rotate: 0 }}
-              whileInView={{ scale: 1, opacity: 1, rotate: 720 }}
-              viewport={{ once: true }}
-              transition={{ repeatType: 'reverse', duration: 1, ease: 'linear' }}
-            >
-              <Image 
-                src="/jari.jpg" 
-                alt="Profile" 
-                width={400}
-                height={400}
-                className="
-                  w-32 h-32 sm:w-44 sm:h-44 md:w-60 md:h-60 lg:w-72 lg:h-72
-                  rounded-full mt-10 sm:mt-12 shadow-2xl object-cover
-                " 
-              />
-            </motion.div>
+              <motion.div
+                initial={{ scale: 0.8, opacity: 0, rotate: 0, y: 30 }}
+                whileInView={{ scale: 1, opacity: 1, rotate: 720, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.2, ease: "easeOut" }}
+              >
+                <Image 
+                  src="/jari.jpg" 
+                  alt="Profile" 
+                  width={400}
+                  height={400}
+                  className="w-36 h-36 sm:w-48 sm:h-48 md:w-60 md:h-60 lg:w-72 lg:h-72 rounded-full mt-12 shadow-2xl object-cover" 
+                />
+              </motion.div>
 
-            <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 mt-12 sm:mt-16 mx-4 max-w-2xl text-center">
-              {t.portfolioText}
-            </p>
-          </motion.section>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 mt-12 mx-4 max-w-2xl text-center"
+              >
+                {t.portfolioText}
+              </motion.p>
+            </motion.section>
+
 
 
         {/* About Section */}
@@ -607,44 +607,52 @@ function Portfolio() {
               </p>
 
               {/* Project Navigation */}
-              <div className="flex items-center gap-4 w-full justify-center mt-4">
-                <motion.button
-                  onClick={prevProject}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="p-2 sm:p-3 rounded-full bg-white/60 dark:bg-black/40 backdrop-blur-sm shadow-md hover:bg-white/80 dark:hover:bg-black/60 transition-all"
-                  aria-label={t.prevButton}
-                >
-                  <ChevronLeft size={20} className="sm:w-6 sm:h-6" />
-                </motion.button>
+                        <div className="flex items-center gap-4 w-full justify-center mt-4">
+              {/* Vasemman nuolen nappi */}
+              <motion.button
+                onClick={prevProject}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="p-3 sm:p-4 rounded-full bg-white/70 dark:bg-black/50 
+                          backdrop-blur-sm shadow-md hover:bg-white/90 
+                          dark:hover:bg-black/70 transition-all"
+                aria-label={t.prevButton}
+              >
+                <ChevronLeft size={24} className="sm:w-7 sm:h-7" />
+              </motion.button>
 
-                <div className="flex gap-4 sm:gap-6">
-                  <motion.a
-                    href={projects[currentProject].link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.05 }}
-                    className="text-sm sm:text-base px-4 sm:px-6 py-2 
-                              bg-white/60 dark:bg-black/40 backdrop-blur-sm
-                              text-gray-700 dark:text-white rounded-full shadow-md
-                              transition-all duration-300 ease-in-out 
-                              hover:bg-blue-500 hover:text-white dark:hover:bg-blue-600 
-                              hover:shadow-xl active:shadow-md"
-                  >
-                    {t.viewButton}
-                  </motion.a>
-                </div>
-
-                <motion.button
-                  onClick={nextProject}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="p-2 sm:p-3 rounded-full bg-white/60 dark:bg-black/40 backdrop-blur-sm shadow-md hover:bg-white/80 dark:hover:bg-black/60 transition-all"
-                  aria-label={t.nextButton}
+              {/* Keskimmäinen "View" -nappi */}
+              <div className="flex gap-4 sm:gap-6">
+                <motion.a
+                  href={projects[currentProject].link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.05 }}
+                  className="text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-3 
+                            bg-white/70 dark:bg-black/50 backdrop-blur-sm
+                            text-gray-800 dark:text-white rounded-full shadow-md
+                            transition-all duration-300 ease-in-out 
+                            hover:bg-blue-500 hover:text-white dark:hover:bg-blue-600 
+                            hover:shadow-xl active:shadow-md"
                 >
-                  <ChevronRight size={20} className="sm:w-6 sm:h-6" />
-                </motion.button>
+                  {t.viewButton}
+                </motion.a>
               </div>
+
+              {/* Oikean nuolen nappi */}
+              <motion.button
+                onClick={nextProject}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="p-3 sm:p-4 rounded-full bg-white/70 dark:bg-black/50 
+                          backdrop-blur-sm shadow-md hover:bg-white/90 
+                          dark:hover:bg-black/70 transition-all"
+                aria-label={t.nextButton}
+              >
+                <ChevronRight size={24} className="sm:w-7 sm:h-7" />
+              </motion.button>
+            </div>
+
 
               {/* Project Indicators */}
               <div className="flex gap-2 mt-2">
