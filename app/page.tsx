@@ -56,16 +56,16 @@ const translations = {
     project1Desc: "A school project and a quiz application built with Next.js and TypeScript. The application fetches quiz questions from a JSON file and providing responsive user experience. Hosted on Vercel.",
     project2Title: "Living a Healthy Life",
     project2Desc: "A client website built with React to showcase services offered by a wellness professional. The site features a responsive design and Hosted on Louhi.",
-    project3Title: "Cleaning Service",
-    project3Desc: "A professional cleaning service website built with modern web technologies. Features responsive design, service listings, and contact forms. Optimized for user experience and SEO.",
-    project4Title: "Formula 1 Finland",
-    project4Desc: "F1 Finland is a Formula 1 fan site featuring Finnish drivers, tracks, and race results. The site fetches real-time and historical data from the OpenF1 API.",
-    project5Title: "Lakes of Finland",
-    project5Desc: "A web application that displays a gallery of Finnish lakes. The project focuses on using JavaScript to create an interactive user experience, including image manipulation and dynamic content loading.",
-    project6Title: "Weather App",
-    project6Desc: "A web application that fetches real-time weather data using a third-party API. The app demonstrates the ability to handle API requests and dynamically display information to the user.",
-    project7Title: "Todo app",
-    project7Desc: "A task management application built with Next.js. This project showcases the ability to create, edit, and delete tasks, demonstrating fundamental CRUD operations.",
+    project3Title: "Formula 1 Finland",
+    project3Desc: "F1 Finland is a Formula 1 fan site featuring Finnish drivers, tracks, and race results. The site fetches real-time and historical data from the OpenF1 API.",
+    project4Title: "Lakes of Finland",
+    project4Desc: "A web application that displays a gallery of Finnish lakes. The project focuses on using JavaScript to create an interactive user experience, including image manipulation and dynamic content loading.",
+    project5Title: "Weather App",
+    project5Desc: "A web application that fetches real-time weather data using a third-party API. The app demonstrates the ability to handle API requests and dynamically display information to the user.",
+    project6Title: "Todo app",
+    project6Desc: "A task management application built with Next.js. This project showcases the ability to create, edit, and delete tasks, demonstrating fundamental CRUD operations.",
+    project7Title: "Cleaning",
+    project7Desc: "Cleaning Services Website",
   },
   fi: {
     welcome: "Tervetuloa!",
@@ -94,16 +94,16 @@ const translations = {
     project1Desc: "Kouluprojekti ja tietovisailusovellus rakennettu Next.js:llä ja TypeScriptillä. Sovellus hakee kysymykset JSON-tiedostosta tarjoten responsiivisen käyttökokemuksen. Isännöity Vercelissä.",
     project2Title: "Terveellinen elämä",
     project2Desc: "Asiakassivusto rakennettu Reactilla esittelemään hyvinvointiammattilaisen palveluita. Sivusto sisältää responsiivisen suunnittelun ja on isännöity Louhella.",
-    project3Title: "Siivouspalvelu",
-    project3Desc: "Ammattimainen siivouspalvelusivusto rakennettu moderneilla web-teknologioilla. Sisältää responsiivisen suunnittelun, palvelulistat ja yhteydenottolomakkeet. Optimoitu käyttökokemukselle ja SEO:lle.",
-    project4Title: "Formula 1 Finland",
-    project4Desc: "F1 Finland on Formula 1 -fanisivusto, mukana suomalaisia kuljettajia, Radat ja kilpailutulokset. Sivusto hakee reaaliaikaista ja historiallista dataa OpenF1-rajapinnasta",
-    project5Title: "Suomen järvet",
-    project5Desc: "Verkkosovellus, joka näyttää gallerian suomalaisista järvistä. Projekti keskittyy JavaScriptin käyttöön interaktiivisen käyttökokemuksen luomiseen, sisältäen kuvankäsittelyn ja dynaamisen sisällön lataamisen.",
-    project6Title: "Sääsovellus",
-    project6Desc: "Verkkosovellus, joka hakee reaaliaikaista säädataa kolmannen osapuolen API:sta. Sovellus osoittaa kykyä käsitellä API-pyyntöjä ja näyttää tietoa dynaamisesti käyttäjälle.",
-    project7Title: "Tehtäväsovellus",
-    project7Desc: "Tehtävienhallintasovellus rakennettu Next.js:llä. Tämä projekti esittelee kykyä luoda, muokata ja poistaa tehtäviä, osoittaen perus CRUD-operaatiot.",
+    project3Title: "Formula 1 Finland",
+    project3Desc: "F1 Finland on Formula 1 -fanisivusto, mukana suomalaisia kuljettajia, Radat ja kilpailutulokset. Sivusto hakee reaaliaikaista ja historiallista dataa OpenF1-rajapinnasta",
+    project4Title: "Suomen järvet",
+    project4Desc: "Verkkosovellus, joka näyttää gallerian suomalaisista järvistä. Projekti keskittyy JavaScriptin käyttöön interaktiivisen käyttökokemuksen luomiseen, sisältäen kuvankäsittelyn ja dynaamisen sisällön lataamisen.",
+    project5Title: "Sääsovellus",
+    project5Desc: "Verkkosovellus, joka hakee reaaliaikaista säädataa kolmannen osapuolen API:sta. Sovellus osoittaa kykyä käsitellä API-pyyntöjä ja näyttää tietoa dynaamisesti käyttäjälle.",
+    project6Title: "Tehtäväsovellus",
+    project6Desc: "Tehtävienhallintasovellus rakennettu Next.js:llä. Tämä projekti esittelee kykyä luoda, muokata ja poistaa tehtäviä, osoittaen perus CRUD-operaatiot.",
+    project7Title: "Siivous",
+    project7Desc: "Siivouspalveluiden verkkosivusto",
   }
 };
 
@@ -120,11 +120,11 @@ function Portfolio() {
   const projects = [
     { title: t.project1Title, description: t.project1Desc, image: "🎯", link: "https://taitaja.vercel.app/" },
     { title: t.project2Title, description: t.project2Desc, image: "🌿", link: "https://www.eevakoskela.fi/" },
-    { title: t.project3Title, description: t.project3Desc, image: "🧹", link: "https://cleaning-sandy.vercel.app/" },
-    { title: t.project4Title, description: t.project4Desc, image: "🏎️", link: "https://f1-finland.vercel.app/" },
-    { title: t.project5Title, description: t.project5Desc, image: "🏞️", link: "https://moontags.github.io/Finnish_Lakes-_Gallery/" },
-    { title: t.project6Title, description: t.project6Desc, image: "🌤️", link: "https://moontags.github.io/Weather_App/" },
-    { title: t.project7Title, description: t.project7Desc, image: "✅", link: "https://todo-lake-nine-41.vercel.app/" },
+    { title: t.project3Title, description: t.project3Desc, image: "🏎️", link: "https://f1-finland.vercel.app/" },
+    { title: t.project4Title, description: t.project4Desc, image: "🏞️", link: "https://moontags.github.io/Finnish_Lakes-_Gallery/" },
+    { title: t.project5Title, description: t.project5Desc, image: "🌤️", link: "https://moontags.github.io/Weather_App/" },
+    { title: t.project6Title, description: t.project6Desc, image: "✅", link: "https://todo-lake-nine-41.vercel.app/" },
+    { title: t.project7Title, description: t.project7Desc, image: "✅", link: "https://cleaning-sandy.vercel.app/" },
   ];
 
   const sections = useMemo(() => ["hero", "about", "skills", "projects", "contact"], []);
@@ -167,14 +167,16 @@ function Portfolio() {
 
   const handleTouchMove = (e: React.TouchEvent) => {
     setTouchEnd(e.targetTouches[0].clientX);
+    setTouchEnd(e.targetTouches[0].clientX);
   };
 
   const handleTouchEnd = () => {
+     const swipeDistance = touchStart - touchEnd;
     if (touchStart - touchEnd > 75) {
       // Swipe left - next project
       nextProject();
     }
-    if (touchStart - touchEnd < -75) {
+     if (Math.abs(swipeDistance) > 75) {
       // Swipe right - previous project
       prevProject();
     }
@@ -188,13 +190,13 @@ function Portfolio() {
     setCurrentProject((prev) => (prev - 1 + projects.length) % projects.length);
   };
 
-  const { scrollYProgress } = useScroll();
+   const { scrollYProgress } = useScroll();
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
-  // Set light mode as default on mount
-  useEffect(() => {
-    document.documentElement.classList.remove('dark');
-  }, []);
+  // Set light mode as default on mount  
+  useEffect(() => {                        
+    document.documentElement.classList.remove('dark'); 
+  }, []);                                  
 
   return (
     <div className="relative">
@@ -310,51 +312,43 @@ function Portfolio() {
         </div>
 
         {/* Hero Section */}
-            <motion.section 
-              id="hero" 
-              className="min-h-screen flex flex-col justify-center items-center px-4 pt-20 -mt-6 sm:-mt-8 md:-mt-12 lg:-mt-16"
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-            >
-              <motion.h1
-                initial={{ scale: 0.95, opacity: 0, y: 10 }}
-                whileInView={{ scale: 1, opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="text-3xl sm:text-4xl md:text-5xl font-bold text-center"
-              >
-                {t.welcome}
-              </motion.h1>
+        <motion.section 
+          id="hero" 
+          className="min-h-screen flex flex-col justify-center items-center px-4 pt-20"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          <motion.h1
+            initial={{ scale: 0, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1 }}
+            className="text-3xl sm:text-4xl md:text-5xl font-bold"
+          >
+            {t.welcome}
+          </motion.h1>
 
-              <motion.div
-                initial={{ scale: 0.8, opacity: 0, rotate: 0, y: 30 }}
-                whileInView={{ scale: 1, opacity: 1, rotate: 720, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1.2, ease: "easeOut" }}
-              >
-                <Image 
-                  src="/jari.jpg" 
-                  alt="Profile" 
-                  width={400}
-                  height={400}
-                  className="w-36 h-36 sm:w-48 sm:h-48 md:w-60 md:h-60 lg:w-72 lg:h-72 rounded-full mt-12 shadow-2xl object-cover" 
-                />
-              </motion.div>
+          <motion.div
+            initial={{ scale: 0, opacity: 0, rotate: 0 }}
+            whileInView={{ scale: 1, opacity: 1, rotate: 720 }}
+            viewport={{ once: true }}
+            transition={{ repeatType: "reverse", duration: 1, ease: "linear" }}
+          >
+            <Image 
+              src="/jari.jpg" 
+              alt="Profile" 
+              width={400}
+              height={400}
+              className="w-36 h-36 sm:w-48 sm:h-48 md:w-60 md:h-60 lg:w-72 lg:h-72 rounded-full mt-8 shadow-2xl object-cover" 
+            />
+          </motion.div>
 
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 mt-12 mx-4 max-w-2xl text-center"
-              >
-                {t.portfolioText}
-              </motion.p>
-            </motion.section>
-
-
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 mt-8 mx-4 max-w-2xl">
+            {t.portfolioText}
+          </p>
+        </motion.section>
 
         {/* About Section */}
         <motion.section 
@@ -606,61 +600,45 @@ function Portfolio() {
                 {projects[currentProject].description}
               </p>
 
-            {/* Project Navigation */}
-              <div className="flex items-center gap-4 w-full justify-center mt-4">
-                {/* Vasemman nuolen nappi */}
+                            {/* Project Navigation */}
+              <div className="flex items-center gap-8 sm:gap-8 w-full justify-center mt-4">
                 <motion.button
                   onClick={prevProject}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
-                  className="p-3 sm:p-4 rounded-full bg-white/70 dark:bg-black/50 
-                            backdrop-blur-sm shadow-md hover:bg-white/90 
-                            dark:hover:bg-black/70 transition-all"
+                  className="p-3 sm:p-3 rounded-full bg-white/60 dark:bg-black/40 backdrop-blur-sm shadow-md hover:bg-white/80 dark:hover:bg-black/60 transition-all"
                   aria-label={t.prevButton}
                 >
-                  <ChevronLeft size={24} className="sm:w-7 sm:h-7" />
+                  <ChevronLeft size={24} className="sm:w-6 sm:h-6" />
                 </motion.button>
 
-                {/* Keskimmäinen "View" -nappi */}
                 <div className="flex gap-4 sm:gap-6">
                   <motion.a
                     href={projects[currentProject].link}
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={(e) => {
-                      // Varmistetaan että linkki on validi
-                      if (!projects[currentProject].link) {
-                        e.preventDefault();
-                        alert('Projekti ei ole vielä saatavilla');
-                      }
-                    }}
-                    className="text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-3 
-                              bg-white/70 dark:bg-black/50 backdrop-blur-sm
-                              text-gray-800 dark:text-white rounded-full shadow-md
+                    className="text-base sm:text-base px-6 sm:px-6 py-2.5 
+                              bg-white/60 dark:bg-black/40 backdrop-blur-sm
+                              text-gray-700 dark:text-white rounded-full shadow-md
                               transition-all duration-300 ease-in-out 
                               hover:bg-blue-500 hover:text-white dark:hover:bg-blue-600 
-                              hover:shadow-xl active:shadow-md cursor-pointer"
+                              hover:shadow-xl active:shadow-md"
                   >
                     {t.viewButton}
                   </motion.a>
                 </div>
 
-                {/* Oikean nuolen nappi */}
                 <motion.button
                   onClick={nextProject}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
-                  className="p-3 sm:p-4 rounded-full bg-white/70 dark:bg-black/50 
-                            backdrop-blur-sm shadow-md hover:bg-white/90 
-                            dark:hover:bg-black/70 transition-all"
+                  className="p-3 sm:p-3 rounded-full bg-white/60 dark:bg-black/40 backdrop-blur-sm shadow-md hover:bg-white/80 dark:hover:bg-black/60 transition-all"
                   aria-label={t.nextButton}
                 >
-                  <ChevronRight size={24} className="sm:w-7 sm:h-7" />
+                  <ChevronRight size={24} className="sm:w-6 sm:h-6" />
                 </motion.button>
               </div>
-
 
               {/* Project Indicators */}
               <div className="flex gap-2 mt-2">
@@ -727,7 +705,7 @@ function Portfolio() {
             </motion.a>
 
             <motion.a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/jari-peltola-25b416153/"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.1, y: -5 }}
@@ -738,7 +716,7 @@ function Portfolio() {
             </motion.a>
 
             <motion.a
-              href="mailto:your.email@example.com"
+              href="mailto:jena9988@gmail.com"
               whileHover={{ scale: 1.1, y: -5 }}
               className="flex items-center gap-3 px-6 py-3 bg-white/60 dark:bg-black/40 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all"
             >
@@ -776,11 +754,6 @@ function Portfolio() {
 }
 
 export default function App() {
-  // Set light mode as default on mount - BEFORE any rendering
-  useEffect(() => {
-    document.documentElement.classList.remove('dark');
-  }, []);
-
   return (
     <LanguageProvider>
       <Portfolio />
