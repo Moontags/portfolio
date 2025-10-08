@@ -69,7 +69,7 @@ const translations = {
   },
   fi: {
     welcome: "Tervetuloa!",
-    portfolioText: "nähdäksesi portfolioni ja matkani ohjelmisokehittäjänä.",
+    portfolioText: "nähdäksesi portfolioni ja matkani ohjelmiskehittäjänä.",
     about: "Tietoa minusta",
     aboutText1: "Olen syksyllä 2025 Salon ammattiopistosta valmistunut ohjelmistokehittäjä. Kokemusta ohjelmoinnista on kertynyt koulutuksen projekteista sekä oman yritystoiminnan kautta. Tällä hetkellä syvennän osaamistani tekoälyn soveltamisessa ohjelmistokehityksessä ja sen opettamisessa datan avulla. Olen motivoitunut kehittämään taitojani jatkuvasti. Harrastuksiini kuuluu triathlon ja musiikki.",
     aboutText2: "Erityisosaamistani on full-stack-verkkosovellusten kehittäminen suunnittelusta ja testauksesta ylläpitoon. Hallitsen ohjelmointikieliä ja teknologioita, kuten JavaScript, TypeScript, PHP, Python, Node.js, React, Laravel ja C#. Olen toteuttanut projekteja Next.js:llä, Express.js:llä, WebSocketsilla ja Prismalla, sekä rakentanut RESTful- ja GraphQL-rajapintoja.",
@@ -619,9 +619,7 @@ function Portfolio() {
                 <div className="flex gap-4 sm:gap-6">
                   <motion.a
                     href={projects[currentProject].link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    // **TÄMÄ ON UUSI KORJAUS** Estää kosketuksen leviäminen, jotta linkki toimii mobiilissa
+                    // HUOM: target="_blank" ja rel="noopener noreferrer" POISTETTU TÄSTÄ
                     onTouchStart={(e) => e.stopPropagation()}
                     whileHover={{ scale: 1.05 }}
                     className="text-base sm:text-base px-6 sm:px-6 py-2.5 
