@@ -1,35 +1,20 @@
 "use client";
-import { useState, createContext, useContext, ReactNode, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Menu, X, Github, Linkedin, Mail, Download, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 
-// Language Context
-interface LanguageContextType {
-  language: 'fi' | 'en';
-  toggleLanguage: () => void;
-}
-
-const LanguageContext = createContext<LanguageContextType>({ 
-  language: 'fi', 
-  toggleLanguage: () => {} 
-});
-
-const useLanguage = () => useContext(LanguageContext);
-
-const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState<'fi' | 'en'>('fi');
-  const toggleLanguage = () => setLanguage(prev => prev === 'fi' ? 'en' : 'fi');
-  return (
-    <LanguageContext.Provider value={{ language, toggleLanguage }}>
-      {children}
-    </LanguageContext.Provider>
-  );
-};
-
 // Käännökset
 const translations = {
+
+  
   en: {
+    nav_home: "Home",
+    nav_about: "About",
+    nav_skills: "Skills",
+    nav_projects: "Projects",
+    nav_contact: "Contact",
     welcome: "Welcome!",
     portfolioText: "to see my portfolio and journey as a developer.",
     about: "About Me",
@@ -68,6 +53,11 @@ const translations = {
     project7Desc: "Cleaning Services Website",
   },
   fi: {
+    nav_home: "Etusivu",
+    nav_about: "Tietoa minusta",
+    nav_skills: "Taidot",
+    nav_projects: "Projektit",
+    nav_contact: "Yhteystiedot",
     welcome: "Tervetuloa!",
     portfolioText: "nähdäksesi portfolioni ja matkani ohjelmiskehittäjänä.",
     about: "Tietoa minusta",
@@ -128,6 +118,15 @@ function Portfolio() {
   ];
 
   const sections = useMemo(() => ["hero", "about", "skills", "projects", "contact"], []);
+
+  // Map section ids to translation keys
+  const navMap: Record<string, keyof typeof translations['fi']> = {
+    hero: 'nav_home',
+    about: 'nav_about',
+    skills: 'nav_skills',
+    projects: 'nav_projects',
+    contact: 'nav_contact',
+  };
 
   // Smooth scroll function
   const scrollToSection = (sectionId: string) => {
@@ -224,7 +223,7 @@ function Portfolio() {
                     : "text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
                 }`}
               >
-                {section === "hero" ? "Home" : section}
+                {t[navMap[section] as keyof typeof t] || section}
               </button>
             ))}
           </div>
@@ -261,7 +260,7 @@ function Portfolio() {
                       : "text-gray-600 dark:text-gray-300"
                   }`}
                 >
-                  {section === "hero" ? "Home" : section}
+                  {t[navMap[section] as keyof typeof t] || section}
                 </button>
               ))}
             </div>
@@ -309,7 +308,7 @@ function Portfolio() {
                   ? "bg-blue-600 dark:bg-blue-400 scale-125" 
                   : "bg-gray-300 dark:bg-gray-600 hover:bg-blue-400"
               }`}
-              aria-label={`Go to ${section}`}
+              aria-label={`Go to ${t[navMap[section] as keyof typeof t] || section}`}
             />
           ))}
         </div>
@@ -671,7 +670,7 @@ function Portfolio() {
   {/* Contact Section */}
 <motion.section 
   id="contact" 
-  className="min-h-screen flex flex-col justify-center px-4 sm:px-6 max-w-3xl text-center py-20"
+  className="min-h-screen flex flex-col  justify-center px-4 sm:px-6  text-center py-20"
   initial={{ opacity: 0, y: 50 }}
   whileInView={{ opacity: 1, y: 0 }}
   viewport={{ once: true, amount: 0.2 }}
@@ -703,9 +702,6 @@ function Portfolio() {
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.6, delay: 0.4 }}
-    // Uudet luokat: Asettaa oletusarvon pystysuuntaiseksi pinoksi (flex-col) 
-    // ja vaihtaa vaakasuuntaiseksi (flex-row) pienillä näytöillä alkaen (sm:)
-    // flex-wrap sallii linkkien rivittyä useammalle riville tarvittaessa
     className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6 justify-center" 
   >
     
@@ -772,9 +768,5 @@ function Portfolio() {
 }
 
 export default function App() {
-  return (
-    <LanguageProvider>
-      <Portfolio />
-    </LanguageProvider>
-  );
+  return <Portfolio />;
 }
