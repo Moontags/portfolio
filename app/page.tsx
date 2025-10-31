@@ -50,7 +50,7 @@ const translations = {
     project6Title: "Todo app",
     project6Desc: "A task management application built with Next.js. This project showcases the ability to create, edit, and delete tasks, demonstrating fundamental CRUD operations.",
     project7Title: "Cleaning",
-    project7Desc: "Cleaning Services Website",
+    project7Desc: "Cleaning Services Website, Implemented with Next.js and TypeScript. The site showcases cleaning services, pricing, and contact information. Hosted on Vercel.",
   },
   fi: {
     nav_home: "Etusivu",
@@ -88,12 +88,12 @@ const translations = {
     project3Desc: "F1 Finland on Formula 1 -fanisivusto, mukana suomalaisia kuljettajia, Radat ja kilpailutulokset. Sivusto hakee reaaliaikaista ja historiallista dataa OpenF1-rajapinnasta",
     // project4Title: "Suomen järvet",
     // project4Desc: "Verkkosovellus, joka näyttää gallerian suomalaisista järvistä. Projekti keskittyy JavaScriptin käyttöön interaktiivisen käyttökokemuksen luomiseen, sisältäen kuvankäsittelyn ja dynaamisen sisällön lataamisen.",
-    project5Title: "Sääsovellus",
-    project5Desc: "Verkkosovellus, joka hakee reaaliaikaista säädataa kolmannen osapuolen API:sta. Sovellus osoittaa kykyä käsitellä API-pyyntöjä ja näyttää tietoa dynaamisesti käyttäjälle.",
-    project6Title: "Tehtäväsovellus",
-    project6Desc: "Tehtävienhallintasovellus rakennettu Next.js:llä. Tämä projekti esittelee kykyä luoda, muokata ja poistaa tehtäviä, osoittaen perus CRUD-operaatiot.",
+    // project5Title: "Sääsovellus",
+    // project5Desc: "Verkkosovellus, joka hakee reaaliaikaista säädataa kolmannen osapuolen API:sta. Sovellus osoittaa kykyä käsitellä API-pyyntöjä ja näyttää tietoa dynaamisesti käyttäjälle.",
+    // project6Title: "Tehtäväsovellus",
+    // project6Desc: "Tehtävienhallintasovellus rakennettu Next.js:llä. Tämä projekti esittelee kykyä luoda, muokata ja poistaa tehtäviä, osoittaen perus CRUD-operaatiot.",
     project7Title: "Siivous",
-    project7Desc: "Siivouspalveluiden verkkosivusto",
+    project7Desc: "Siivouspalveluiden verkkosivusto, Toteuttettu Next.js:llä ja TypeScriptillä. Sivusto esittelee siivouspalveluita, hinnoittelua ja yhteystietoja. Isännöity Vercelissä.",
   }
 };
 
@@ -112,8 +112,8 @@ function Portfolio() {
     { title: t.project2Title, description: t.project2Desc, image: "🌿", link: "https://www.eevakoskela.fi/" },
     { title: t.project3Title, description: t.project3Desc, image: "🏎️", link: "https://f1-finland.vercel.app/" },
     // { title: t.project4Title, description: t.project4Desc, image: "🏞️", link: "https://moontags.github.io/Finnish_Lakes-_Gallery/" },
-    { title: t.project5Title, description: t.project5Desc, image: "🌤️", link: "https://moontags.github.io/Weather_App/" },
-    { title: t.project6Title, description: t.project6Desc, image: "✅", link: "https://todo-lake-nine-41.vercel.app/" },
+    // { title: t.project5Title, description: t.project5Desc, image: "🌤️", link: "https://moontags.github.io/Weather_App/" },
+    // { title: t.project6Title, description: t.project6Desc, image: "✅", link: "https://todo-lake-nine-41.vercel.app/" },
     { title: t.project7Title, description: t.project7Desc, image: "✅", link: "https://cleaning-sandy.vercel.app/" },
   ];
 
