@@ -710,7 +710,7 @@ function Portfolio() {
       href="mailto:jena9988@gmail.com" 
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      className="flex items-center justify-center gap-2 px-8 py-3 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 transition-all w-full sm:w-auto"
+      className="flex items-center justify-center gap-2 px-8 py-3 bg-blue-600 text-white rounded-full shadow-sm hover:bg-blue-700 transition-all w-full sm:w-auto"
     >
       <Mail size={20} />
       {t.sendMessage}
@@ -723,7 +723,7 @@ function Portfolio() {
       rel="noopener noreferrer"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      className="flex items-center justify-center gap-2 px-8 py-3 bg-gray-700 text-white rounded-full shadow-lg hover:bg-gray-800 transition-all dark:bg-gray-300 dark:text-gray-900 dark:hover:bg-gray-400 w-full sm:w-auto"
+      className="flex items-center justify-center gap-2 px-8 py-3 bg-gray-700 text-white rounded-full shadow-sm hover:bg-gray-800 transition-all dark:bg-gray-300 dark:text-gray-900 dark:hover:bg-gray-400 w-full sm:w-auto"
     >
       <Github size={20} />
       GitHub
@@ -736,7 +736,7 @@ function Portfolio() {
       rel="noopener noreferrer"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      className="flex items-center justify-center gap-2 px-8 py-3 bg-blue-800 text-white rounded-full shadow-lg hover:bg-blue-900 transition-all w-full sm:w-auto"
+      className="flex items-center justify-center gap-2 px-8 py-3 bg-blue-800 text-white rounded-full shadow-sm hover:bg-blue-900 transition-all w-full sm:w-auto"
     >
       <Linkedin size={20} />
       LinkedIn
@@ -748,7 +748,7 @@ function Portfolio() {
       download
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      className="flex items-center justify-center gap-2 px-8 py-3 border border-gray-400 dark:border-gray-500 text-gray-700 dark:text-gray-300 rounded-full shadow-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all w-full sm:w-auto"
+      className="flex items-center justify-center gap-2 px-8 py-3 border border-gray-400 dark:border-gray-500 text-gray-700 dark:text-gray-300 rounded-full shadow-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-all w-full sm:w-auto"
     >
       <Download size={20} />
       {t.downloadCV}
