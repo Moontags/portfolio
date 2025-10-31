@@ -18,10 +18,10 @@ const translations = {
     welcome: "Welcome!",
     portfolioText: "to see my portfolio and journey as a developer.",
     about: "About Me",
-    aboutText1: "I graduated as a software developer from Salo Vocational College in fall 2025. My programming experience comes from educational projects and my own business ventures. Currently, I'm deepening my expertise in applying AI to software development and teaching it through data. I'm motivated to continuously develop my skills. In my free time, I enjoy triathlon and music.",
+    aboutText1: "I graduated as a software developer from Salo Vocational College in fall 2025. My programming experience comes from educational projects and my own business ventures.",
     aboutText2: "My core expertise lies in full-stack web application development from design and testing to maintenance. I master programming languages and technologies such as JavaScript, TypeScript, PHP, Python, Node.js, React, Laravel, and C#. I've implemented projects with Next.js, Express.js, WebSockets, and Prisma, and built RESTful and GraphQL APIs.",
-    aboutText3: "I have experience with both relational databases (MySQL, PostgreSQL) and NoSQL databases (MongoDB). I understand performance optimization, SEO fundamentals, and key security practices (OWASP Top 10, encryption, JWT, OAuth). I work with cloud services like AWS, Vercel, Render, and Docker, applying DevOps principles and CI/CD pipelines.",
-    aboutText4: "I also have knowledge of AI technologies including TensorFlow and PyTorch. I have a keen eye for UI/UX design and pay close attention to detail. My projects are well-documented and scalable.",
+    aboutText3: "I have experience with both relational databases and NoSQL databases. I understand performance optimization, SEO fundamentals, and key security practices (OWASP Top 10, encryption, JWT, OAuth). I work with cloud services like AWS, Vercel, Render, and Docker, applying DevOps principles and CI/CD pipelines.",
+    aboutText4: "Currently, I'm deepening my expertise in applying AI in software development and teaching it through data. In mobile development, I use React Native and Expo. I'm motivated to continuously improve my skills. My hobbies include triathlon and music.",
     skills: "Skills",
     frontendTech: "Frontend Technologies:",
     backendTech: "Backend Technologies:",
@@ -61,10 +61,10 @@ const translations = {
     welcome: "Tervetuloa!",
     portfolioText: "nähdäksesi portfolioni ja matkani ohjelmiskehittäjänä.",
     about: "Tietoa minusta",
-    aboutText1: "Olen syksyllä 2025 Salon ammattiopistosta valmistunut ohjelmistokehittäjä. Kokemusta ohjelmoinnista on kertynyt koulutuksen projekteista sekä oman yritystoiminnan kautta. Tällä hetkellä syvennän osaamistani tekoälyn soveltamisessa ohjelmistokehityksessä ja sen opettamisessa datan avulla. Olen motivoitunut kehittämään taitojani jatkuvasti. Harrastuksiini kuuluu triathlon ja musiikki.",
+    aboutText1: "Olen syksyllä 2025 Salon ammattiopistosta valmistunut ohjelmistokehittäjä. Kokemusta ohjelmoinnista on kertynyt koulutuksen projekteista sekä oman yritystoiminnan kautta.",
     aboutText2: "Erityisosaamistani on full-stack-verkkosovellusten kehittäminen suunnittelusta ja testauksesta ylläpitoon. Hallitsen ohjelmointikieliä ja teknologioita, kuten JavaScript, TypeScript, PHP, Python, Node.js, React, Laravel ja C#. Olen toteuttanut projekteja Next.js:llä, Express.js:llä, WebSocketsilla ja Prismalla, sekä rakentanut RESTful- ja GraphQL-rajapintoja.",
-    aboutText3: "Kokemusta minulla on sekä relaatiotietokannoista (MySQL, PostgreSQL) että NoSQL-tietokannoista (MongoDB). Ymmärrän suorituskyvyn optimointia, SEO:n perusteita sekä tietoturvan keskeiset käytännöt (OWASP Top 10, salaus, JWT, OAuth). Työskentelen pilvipalvelujen kuten AWS:n, Vercelin, Renderin ja Dockerin parissa soveltaen DevOps-periaatteita ja CI/CD-putkia.",
-    aboutText4: "Minulla on myös osaamista tekoälyteknologioista, kuten TensorFlow ja PyTorch. Minulla on tarkka silmä UI/UX-suunnitteluun ja kiinnitän huomiota yksityiskohtiin. Projektini ovat hyvin dokumentoituja ja skaalautuvia.",
+    aboutText3: "Kokemusta minulla on sekä relaatiotietokannoista, että NoSQL-tietokannoista. Ymmärrän suorituskyvyn optimointia, SEO:n perusteita sekä tietoturvan keskeiset käytännöt: OWASP Top 10, salaus, JWT, OAuth. Työskentelen pilvipalvelujen kuten AWS:n, Vercelin, Renderin ja Dockerin parissa soveltaen DevOps-periaatteita ja CI/CD-putkia.",
+    aboutText4: "Tällä hetkellä syvennän osaamistani tekoälyn soveltamisessa ohjelmistokehityksessä, sekä sen opettamisessa datan avulla.   Mobiilikehityksessä käytän React Nativea ja Expoa. Olen motivoitunut kehittämään taitojani jatkuvasti. Harrastuksiini kuuluu triathlon ja musiikki.",
     skills: "Taidot",
     frontendTech: "Frontend-teknologiat:",
     backendTech: "Backend-teknologiat:",
@@ -211,7 +211,7 @@ function Portfolio() {
       <div className="flex flex-col items-center text-center text-gray-900 dark:text-white mx-1 transition-colors duration-300">
         
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-white/80 dark:bg-black/40 backdrop-blur-md rounded-full px-8 py-4 shadow-lg">
+        <nav className="hidden md:flex fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-white/80 dark:bg-black/40 backdrop-blur-md rounded-full px-8 py-4 shadow-sm">
           <div className="flex items-center gap-8">
             {sections.map((section) => (
               <button
@@ -235,7 +235,7 @@ function Portfolio() {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
-            className="p-3 rounded-full bg-white/80 dark:bg-black/40 backdrop-blur-md shadow-lg"
+            className="p-3 rounded-full bg-white/80 dark:bg-black/40 backdrop-blur-md shadow-sm"
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </motion.button>
@@ -247,7 +247,7 @@ function Portfolio() {
             initial={{ opacity: 0, x: -100 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -100 }}
-            className="md:hidden fixed top-20 left-4 z-40 bg-white/95 dark:bg-black/95 backdrop-blur-md rounded-2xl p-6 shadow-xl"
+            className="md:hidden fixed top-20 left-4 z-40 bg-white/95 dark:bg-black/95 backdrop-blur-md rounded-2xl p-6 shadow-sm"
           >
             <div className="flex flex-col gap-4">
               {sections.map((section) => (
@@ -273,7 +273,7 @@ function Portfolio() {
             onClick={toggleLanguage}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
-            className="p-2 sm:p-2.5 rounded-full bg-white/80 dark:bg-black/40 backdrop-blur-md shadow-lg hover:bg-white/90 dark:hover:bg-black/50 transition-all"
+            className="p-2 sm:p-2.5 rounded-full bg-white/80 dark:bg-black/40 backdrop-blur-md shadow-sm hover:bg-white/90 dark:hover:bg-black/50 transition-all"
             aria-label="Change language"
           >
             <span className="text-xl sm:text-2xl">
@@ -287,7 +287,7 @@ function Portfolio() {
             }}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
-            className="p-2 sm:p-2.5 rounded-full bg-white/80 dark:bg-black/40 backdrop-blur-md shadow-lg hover:bg-white/90 dark:hover:bg-black/50 transition-all"
+            className="p-2 sm:p-2.5 rounded-full bg-white/80 dark:bg-black/40 backdrop-blur-md shadow-sm hover:bg-white/90 dark:hover:bg-black/50 transition-all"
             aria-label="Toggle dark mode"
           >
             <span className="text-xl sm:text-2xl">
@@ -343,7 +343,7 @@ function Portfolio() {
               alt="Profile" 
               width={400}
               height={400}
-              className="w-36 h-36 sm:w-48 sm:h-48 md:w-60 md:h-60 lg:w-72 lg:h-72 rounded-full mt-8 shadow-2xl object-cover" 
+              className="w-36 h-36 sm:w-48 sm:h-48 md:w-60 md:h-60 lg:w-72 lg:h-72 rounded-full mt-8 shadow-sm object-cover" 
             />
           </motion.div>
 
