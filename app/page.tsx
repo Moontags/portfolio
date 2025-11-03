@@ -339,7 +339,7 @@ function Portfolio() {
             transition={{ repeatType: "reverse", duration: 1, ease: "linear" }}
           >
             <Image 
-              src="/jari.png" 
+              src="/jari1.jpg" 
               alt="Profile" 
               width={400}
               height={400}
