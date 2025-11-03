@@ -339,11 +339,11 @@ function Portfolio() {
             transition={{ repeatType: "reverse", duration: 1, ease: "linear" }}
           >
             <Image 
-              src="/jari.jpg" 
+              src="/jari.png" 
               alt="Profile" 
               width={400}
               height={400}
-              className="w-36 h-36 sm:w-48 sm:h-48 md:w-60 md:h-60 lg:w-72 lg:h-72 rounded-full mt-8 shadow-sm object-cover" 
+              className="w-42 h-42 sm:w-48 sm:h-48 md:w-60 md:h-60 lg:w-72 lg:h-72 rounded-full mt-8 shadow-sm object-cover" 
             />
           </motion.div>
 
