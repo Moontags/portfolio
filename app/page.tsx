@@ -41,8 +41,8 @@ const translations = {
     project1Desc: "A school project and a quiz application built with Next.js and TypeScript. The application fetches quiz questions from a JSON file and providing responsive user experience. Hosted on Vercel.",
     project2Title: "Living a Healthy Life",
     project2Desc: "A client website built with React to showcase services offered by a wellness professional. The site features a responsive design and Hosted on Louhi.",
-    project3Title: "Formula 1 Finland",
-    project3Desc: "F1 Finland is a Formula 1 fan site featuring Finnish drivers, tracks, and race results. The site fetches real-time and historical data from the OpenF1 API.",
+    project3Title: "Hitservice",
+    project3Desc: "Professional earthmoving machinery maintenance, repairs, rental, and reliable transport services.",
     project4Title: "Lakes of Finland",
     project4Desc: "A web application that displays a gallery of Finnish lakes. The project focuses on using JavaScript to create an interactive user experience, including image manipulation and dynamic content loading.",
     project5Title: "Weather App",
@@ -84,8 +84,8 @@ const translations = {
     // project1Desc: "Kouluprojekti ja tietovisailusovellus rakennettu Next.js:llä ja TypeScriptillä. Sovellus hakee kysymykset JSON-tiedostosta tarjoten responsiivisen käyttökokemuksen. Isännöity Vercelissä.",
     project2Title: "Terveellinen elämä",
     project2Desc: "Asiakassivusto rakennettu Reactilla esittelemään hyvinvointiammattilaisen palveluita. Sivusto sisältää responsiivisen suunnittelun ja on isännöity Louhella.",
-    project3Title: "Formula 1 Finland",
-    project3Desc: "F1 Finland on Formula 1 -fanisivusto, mukana suomalaisia kuljettajia, Radat ja kilpailutulokset. Sivusto hakee reaaliaikaista ja historiallista dataa OpenF1-rajapinnasta",
+    project3Title: "Hitservice",
+    project3Desc: "Ammattimaista maanrakennuskoneiden huoltoa, korjausta, vuokrausta sekä luotettavia kuljetuspalveluita.",
     // project4Title: "Suomen järvet",
     // project4Desc: "Verkkosovellus, joka näyttää gallerian suomalaisista järvistä. Projekti keskittyy JavaScriptin käyttöön interaktiivisen käyttökokemuksen luomiseen, sisältäen kuvankäsittelyn ja dynaamisen sisällön lataamisen.",
     // project5Title: "Sääsovellus",
@@ -110,11 +110,11 @@ function Portfolio() {
   const projects = [
     // { title: t.project1Title, description: t.project1Desc, image: "🎯", link: "https://taitaja.vercel.app/" },
     { title: t.project2Title, description: t.project2Desc, image: "🌿", link: "https://www.eevakoskela.fi/" },
-    { title: t.project3Title, description: t.project3Desc, image: "🏎️", link: "https://f1-finland.vercel.app/" },
+    { title: t.project3Title, description: t.project3Desc, image: "🎯", link: "https://www.hitservice.fi/" },
     // { title: t.project4Title, description: t.project4Desc, image: "🏞️", link: "https://moontags.github.io/Finnish_Lakes-_Gallery/" },
     // { title: t.project5Title, description: t.project5Desc, image: "🌤️", link: "https://moontags.github.io/Weather_App/" },
     // { title: t.project6Title, description: t.project6Desc, image: "✅", link: "https://todo-lake-nine-41.vercel.app/" },
-    { title: t.project7Title, description: t.project7Desc, image: "✅", link: "https://cleaning-sandy.vercel.app/" },
+    { title: t.project7Title, description: t.project7Desc, image: "✅", link: "https://www.siivousote.fi/" },
   ];
 
   const sections = useMemo(() => ["hero", "about", "skills", "projects", "contact"], []);
