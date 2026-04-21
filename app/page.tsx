@@ -2,7 +2,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Menu, X, Github, Linkedin, Mail, Download, ChevronLeft, ChevronRight } from "lucide-react";
+import { Menu, X, Github, Linkedin, Mail, Download, ChevronLeft, ChevronRight, Heart, Wrench, Sparkles, Truck, type LucideIcon } from "lucide-react";
 import Image from "next/image";
 
 // Käännökset
@@ -15,20 +15,20 @@ const translations = {
     nav_skills: "Skills",
     nav_projects: "Projects",
     nav_contact: "Contact",
-    welcome: "Welcome!",
-    portfolioText: "to see my portfolio and journey as a developer.",
+    welcome: "Hi, I'm Jari.",
+    portfolioText: "A full-stack developer based in Finland — building web apps from idea to deployment.",
     about: "About Me",
-    aboutText1: "I graduated as a software developer from Salo Vocational College in fall 2025. My programming experience comes from educational projects and my own business ventures.",
-    aboutText2: "My core expertise lies in full-stack web application development from design and testing to maintenance. I master programming languages and technologies such as JavaScript, TypeScript, PHP, Python, Node.js, React, Laravel, and C#. I've implemented projects with Next.js, Express.js, WebSockets, and Prisma, and built RESTful and GraphQL APIs.",
-    aboutText3: "I have experience with both relational databases and NoSQL databases. I understand performance optimization, SEO fundamentals, and key security practices (OWASP Top 10, encryption, JWT, OAuth). I work with cloud services like AWS, Vercel, Render, and Docker, applying DevOps principles and CI/CD pipelines.",
-    aboutText4: "Currently, I'm deepening my expertise in applying AI in software development and teaching it through data. In mobile development, I use React Native and Expo. I'm motivated to continuously improve my skills. My hobbies include triathlon and music.",
+    aboutText1: "I'm a software developer who graduated from Salo Vocational College in fall 2025. My experience comes from real projects — both during my studies and through my own business ventures.",
+    aboutText2: "I enjoy building things end-to-end: from thinking through the design to writing the code and putting it live. Lately I've been especially interested in how AI can be applied in software development.",
+    aboutText3: "Outside of coding, you'll find me training for triathlons or playing music.",
+    aboutText4: "",
     skills: "Skills",
+    skillsIntro: "My core stack — the tools I reach for first.",
     frontendTech: "Frontend Technologies:",
     backendTech: "Backend Technologies:",
     databases: "Databases:",
     versionControl: "Version Control & Tools:",
-    projectManagement: "Project Management & Collaboration:",
-    graphicDesign: "Graphic Design:",
+    otherTools: "Other tools:",
     projects: "Projects",
     contact: "Contact",
     contactText: "Interested in working together? Feel free to reach out!",
@@ -60,20 +60,20 @@ const translations = {
     nav_skills: "Taidot",
     nav_projects: "Projektit",
     nav_contact: "Yhteystiedot",
-    welcome: "Tervetuloa!",
-    portfolioText: "nähdäksesi portfolioni ja matkani ohjelmiskehittäjänä.",
+    welcome: "Hei, olen Jari.",
+    portfolioText: "Full-stack kehittäjä Suomesta — rakennan verkkosovelluksia ideasta julkaisuun.",
     about: "Tietoa minusta",
-    aboutText1: "Olen syksyllä 2025 Salon ammattiopistosta valmistunut ohjelmistokehittäjä. Kokemusta ohjelmoinnista on kertynyt koulutuksen projekteista sekä oman yritystoiminnan kautta.",
-    aboutText2: "Erityisosaamistani on full-stack-verkkosovellusten kehittäminen suunnittelusta ja testauksesta ylläpitoon. Hallitsen ohjelmointikieliä ja teknologioita, kuten JavaScript, TypeScript, PHP, Python, Node.js, React, Laravel ja C#. Olen toteuttanut projekteja Next.js:llä, Express.js:llä, WebSocketsilla ja Prismalla, sekä rakentanut RESTful- ja GraphQL-rajapintoja.",
-    aboutText3: "Kokemusta minulla on sekä relaatiotietokannoista, että NoSQL-tietokannoista. Ymmärrän suorituskyvyn optimointia, SEO:n perusteita sekä tietoturvan keskeiset käytännöt: OWASP Top 10, salaus, JWT, OAuth. Työskentelen pilvipalvelujen kuten AWS:n, Vercelin, Renderin ja Dockerin parissa soveltaen DevOps-periaatteita ja CI/CD-putkia.",
-    aboutText4: "Tällä hetkellä syvennän osaamistani tekoälyn soveltamisessa ohjelmistokehityksessä, sekä sen opettamisessa datan avulla.   Mobiilikehityksessä käytän React Nativea ja Expoa. Olen motivoitunut kehittämään taitojani jatkuvasti. Harrastuksiini kuuluu triathlon ja musiikki.",
+    aboutText1: "Olen syksyllä 2025 Salon ammattiopistosta valmistunut ohjelmistokehittäjä. Kokemukseni on kertynyt todellisista projekteista — sekä opintojen että oman yritystoiminnan kautta.",
+    aboutText2: "Pidän rakentamisesta alusta loppuun: designin suunnittelusta koodin kirjoittamiseen ja julkaisuun. Viime aikoina olen ollut erityisen kiinnostunut tekoälyn soveltamisesta ohjelmistokehityksessä.",
+    aboutText3: "Koodauksen ulkopuolella löydät minut triathlonharjoituksista tai musiikin parissa.",
+    aboutText4: "",
     skills: "Taidot",
+    skillsIntro: "Ydinosaamiseni — teknologiat joihin tartun ensimmäisenä.",
     frontendTech: "Frontend-teknologiat:",
     backendTech: "Backend-teknologiat:",
     databases: "Tietokannat:",
     versionControl: "Versionhallinta & Työkalut:",
-    projectManagement: "Projektinhallinta & Yhteistyö:",
-    graphicDesign: "Graafinen suunnittelu:",
+    otherTools: "Muut työkalut:",
     projects: "Projektit",
     contact: "Yhteystiedot",
     contactText: "Kiinnostunut yhteistyöstä? Ota rohkeasti yhteyttä!",
@@ -111,12 +111,11 @@ function Portfolio() {
 
   const t = translations[language];
 
-  const projects = [
-    // { title: t.project1Title, description: t.project1Desc, image: "🎯", link: "https://taitaja.vercel.app/" },
-    { title: t.project2Title, description: t.project2Desc, image: "🌿", link: "https://www.eevakoskela.fi/" },
-    { title: t.project3Title, description: t.project3Desc, image: "🎯", link: "https://www.hitservice.fi/" },
-    { title: t.project7Title, description: t.project7Desc, image: "✅", link: "https://www.siivousote.fi/" },
-    { title: t.project8Title, description: t.project8Desc, image: "🚐", link: "https://www.pakuvie.fi/" },
+  const projects: Array<{ title: string; description: string; Icon: LucideIcon; gradient: string; iconColor: string; link: string }> = [
+    { title: t.project2Title, description: t.project2Desc, Icon: Heart, gradient: "from-emerald-100 to-green-200 dark:from-emerald-900/40 dark:to-green-800/40", iconColor: "text-green-600 dark:text-green-400", link: "https://www.eevakoskela.fi/" },
+    { title: t.project3Title, description: t.project3Desc, Icon: Wrench, gradient: "from-orange-100 to-amber-200 dark:from-orange-900/40 dark:to-amber-800/40", iconColor: "text-orange-600 dark:text-orange-400", link: "https://www.hitservice.fi/" },
+    { title: t.project7Title, description: t.project7Desc, Icon: Sparkles, gradient: "from-sky-100 to-blue-200 dark:from-sky-900/40 dark:to-blue-800/40", iconColor: "text-sky-600 dark:text-sky-400", link: "https://www.siivousote.fi/" },
+    { title: t.project8Title, description: t.project8Desc, Icon: Truck, gradient: "from-indigo-100 to-violet-200 dark:from-indigo-900/40 dark:to-violet-800/40", iconColor: "text-indigo-600 dark:text-indigo-400", link: "https://www.pakuvie.fi/" },
   ];
 
   const sections = useMemo(() => ["hero", "about", "skills", "projects", "contact"], []);
@@ -197,10 +196,12 @@ function Portfolio() {
    const { scrollYProgress } = useScroll();
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
-  // Set light mode as default on mount  
-  useEffect(() => {                        
-    document.documentElement.classList.remove('dark'); 
-  }, []);                                  
+  // Set light mode as default on mount
+  useEffect(() => {
+    document.documentElement.classList.remove('dark');
+  }, []);
+
+  const CurrentProjectIcon = projects[currentProject].Icon;
 
   return (
     <div className="relative">
@@ -220,14 +221,33 @@ function Portfolio() {
                 key={section}
                 onClick={() => scrollToSection(section)}
                 className={`text-base font-medium transition-colors capitalize ${
-                  activeSection === section 
-                    ? "text-blue-600 dark:text-blue-400" 
+                  activeSection === section
+                    ? "text-blue-600 dark:text-blue-400"
                     : "text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
                 }`}
               >
                 {t[navMap[section] as keyof typeof t] || section}
               </button>
             ))}
+            <div className="w-px h-5 bg-gray-300 dark:bg-gray-600" />
+            <a
+              href="https://github.com/Moontags"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              aria-label="GitHub"
+            >
+              <Github size={20} />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/jari-peltola-25b416153/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              aria-label="LinkedIn"
+            >
+              <Linkedin size={20} />
+            </a>
           </div>
         </nav>
 
@@ -385,8 +405,6 @@ function Portfolio() {
               <span>{t.aboutText2}</span>
               <br /><br />
               <span>{t.aboutText3}</span>
-              <br /><br />
-              <span>{t.aboutText4}</span>
             </p>
           </motion.div>
         </motion.section>
@@ -410,7 +428,11 @@ function Portfolio() {
             {t.skills}
           </motion.h2>
 
-          <motion.div 
+          <p className="text-sm sm:text-base text-gray-500 dark:text-gray-500 mb-6 italic">
+            {t.skillsIntro}
+          </p>
+
+          <motion.div
             className="text-base sm:text-lg text-gray-600 dark:text-gray-400 text-left"
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -419,23 +441,30 @@ function Portfolio() {
           >
             <h3 className="text-gray-900 dark:text-white font-semibold mb-3">{t.frontendTech}</h3>
             <div className="flex flex-wrap gap-2">
-              {["HTML", "CSS", "Tailwind CSS", "JavaScript", "TypeScript", "React", "Next.js"].map((skill, i) => (
-                <motion.span 
-                  key={skill}
-                  initial={{ opacity: 0, scale: 0 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.05 }}
-                  whileHover={{ scale: 1.1, backgroundColor: "rgba(59, 130, 246, 0.1)" }}
-                  className="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 rounded-full text-sm sm:text-base transition-all cursor-default"
-                >
-                  {skill}
-                </motion.span>
-              ))}
+              {["HTML", "CSS", "Tailwind CSS", "JavaScript", "TypeScript", "React", "Next.js"].map((skill, i) => {
+                const isPrimary = ["JavaScript", "TypeScript", "React", "Next.js"].includes(skill);
+                return (
+                  <motion.span
+                    key={skill}
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.05 }}
+                    whileHover={{ scale: 1.1 }}
+                    className={`px-3 py-1.5 rounded-full text-sm sm:text-base transition-all cursor-default ${
+                      isPrimary
+                        ? "bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-800 font-semibold text-blue-900 dark:text-blue-200"
+                        : "bg-gray-100 dark:bg-gray-800"
+                    }`}
+                  >
+                    {skill}
+                  </motion.span>
+                );
+              })}
             </div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="text-base sm:text-lg text-gray-600 dark:text-gray-400 text-left mt-6"
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -444,23 +473,30 @@ function Portfolio() {
           >
             <h3 className="text-gray-900 dark:text-white font-semibold mb-3">{t.backendTech}</h3>
             <div className="flex flex-wrap gap-2">
-              {["PHP", "C#", "Docker", "Python", "Node.js", "Drupal", "Laravel", "Express", "Flask"].map((skill, i) => (
-                <motion.span 
-                  key={skill}
-                  initial={{ opacity: 0, scale: 0 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.05 }}
-                  whileHover={{ scale: 1.1, backgroundColor: "rgba(59, 130, 246, 0.1)" }}
-                  className="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 rounded-full text-sm sm:text-base transition-all cursor-default"
-                >
-                  {skill}
-                </motion.span>
-              ))}
+              {["PHP", "C#", "Docker", "Python", "Node.js", "Drupal", "Laravel", "Express", "Flask"].map((skill, i) => {
+                const isPrimary = ["Node.js"].includes(skill);
+                return (
+                  <motion.span
+                    key={skill}
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.05 }}
+                    whileHover={{ scale: 1.1 }}
+                    className={`px-3 py-1.5 rounded-full text-sm sm:text-base transition-all cursor-default ${
+                      isPrimary
+                        ? "bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-800 font-semibold text-blue-900 dark:text-blue-200"
+                        : "bg-gray-100 dark:bg-gray-800"
+                    }`}
+                  >
+                    {skill}
+                  </motion.span>
+                );
+              })}
             </div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="text-base sm:text-lg text-gray-600 dark:text-gray-400 text-left mt-6"
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -469,23 +505,30 @@ function Portfolio() {
           >
             <h3 className="text-gray-900 dark:text-white font-semibold mb-3">{t.databases}</h3>
             <div className="flex flex-wrap gap-2">
-              {["MySQL", "MongoDB", "PostgreSQL", "Supabase"].map((skill, i) => (
-                <motion.span 
-                  key={skill}
-                  initial={{ opacity: 0, scale: 0 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.05 }}
-                  whileHover={{ scale: 1.1, backgroundColor: "rgba(59, 130, 246, 0.1)" }}
-                  className="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 rounded-full text-sm sm:text-base transition-all cursor-default"
-                >
-                  {skill}
-                </motion.span>
-              ))}
+              {["MySQL", "MongoDB", "PostgreSQL", "Supabase"].map((skill, i) => {
+                const isPrimary = ["PostgreSQL"].includes(skill);
+                return (
+                  <motion.span
+                    key={skill}
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.05 }}
+                    whileHover={{ scale: 1.1 }}
+                    className={`px-3 py-1.5 rounded-full text-sm sm:text-base transition-all cursor-default ${
+                      isPrimary
+                        ? "bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-800 font-semibold text-blue-900 dark:text-blue-200"
+                        : "bg-gray-100 dark:bg-gray-800"
+                    }`}
+                  >
+                    {skill}
+                  </motion.span>
+                );
+              })}
             </div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="text-base sm:text-lg text-gray-600 dark:text-gray-400 text-left mt-6"
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -495,7 +538,7 @@ function Portfolio() {
             <h3 className="text-gray-900 dark:text-white font-semibold mb-3">{t.versionControl}</h3>
             <div className="flex flex-wrap gap-2">
               {["GitHub", "GitHub Actions", "GitLens", "Vercel", "Hostinger", "AWS", "Postman"].map((skill, i) => (
-                <motion.span 
+                <motion.span
                   key={skill}
                   initial={{ opacity: 0, scale: 0 }}
                   whileInView={{ opacity: 1, scale: 1 }}
@@ -510,49 +553,24 @@ function Portfolio() {
             </div>
           </motion.div>
 
-          <motion.div 
-            className="text-base sm:text-lg text-gray-600 dark:text-gray-400 text-left mt-6"
+          <motion.div
+            className="text-base sm:text-lg text-gray-600 dark:text-gray-400 text-left mt-8 pt-6 border-t border-gray-200 dark:border-gray-700"
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.5 }}
           >
-            <h3 className="text-gray-900 dark:text-white font-semibold mb-3">{t.projectManagement}</h3>
+            <h3 className="text-gray-500 dark:text-gray-500 font-medium mb-3 text-sm">{t.otherTools}</h3>
             <div className="flex flex-wrap gap-2">
-              {["Scrum", "Trello", "Slack"].map((skill, i) => (
-                <motion.span 
+              {["Scrum", "Trello", "Slack", "Figma", "Photoshop", "Premiere", "Illustrator", "Draw.io", "Canva"].map((skill, i) => (
+                <motion.span
                   key={skill}
                   initial={{ opacity: 0, scale: 0 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.05 }}
-                  whileHover={{ scale: 1.1, backgroundColor: "rgba(59, 130, 246, 0.1)" }}
-                  className="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 rounded-full text-sm sm:text-base transition-all cursor-default"
-                >
-                  {skill}
-                </motion.span>
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.div 
-            className="text-base sm:text-lg text-gray-600 dark:text-gray-400 text-left mt-6"
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-          >
-            <h3 className="text-gray-900 dark:text-white font-semibold mb-3">{t.graphicDesign}</h3>
-            <div className="flex flex-wrap gap-2">
-              {["Figma", "Photoshop", "Premiere", "Illustrator", "Draw.io", "Canva"].map((skill, i) => (
-                <motion.span 
-                  key={skill}
-                  initial={{ opacity: 0, scale: 0 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.05 }}
-                  whileHover={{ scale: 1.1, backgroundColor: "rgba(59, 130, 246, 0.1)" }}
-                  className="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 rounded-full text-sm sm:text-base transition-all cursor-default"
+                  whileHover={{ scale: 1.05 }}
+                  className="px-2.5 py-1 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-full text-xs text-gray-400 dark:text-gray-500 transition-all cursor-default"
                 >
                   {skill}
                 </motion.span>
@@ -592,8 +610,8 @@ function Portfolio() {
           >
             <div className="flex flex-col justify-center items-center gap-6 sm:gap-8">
               
-              <div className="flex items-center justify-center w-48 h-32 sm:w-64 sm:h-40 lg:w-80 lg:h-52 overflow-hidden">
-                <div className="text-6xl sm:text-7xl lg:text-9xl">{projects[currentProject].image}</div>
+              <div className={`flex items-center justify-center w-48 h-32 sm:w-64 sm:h-40 lg:w-80 lg:h-52 overflow-hidden rounded-2xl bg-gradient-to-br ${projects[currentProject].gradient}`}>
+                <CurrentProjectIcon size={72} className={projects[currentProject].iconColor} />
               </div>
 
               <h3 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-900 dark:text-white">
