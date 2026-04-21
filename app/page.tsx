@@ -53,6 +53,8 @@ const translations = {
     project7Desc: "Cleaning Services Website, Implemented with Next.js and TypeScript. The site showcases cleaning services, pricing, and contact information. Hosted on Vercel.",
     project8Title: "Pakuvie",
     project8Desc: "A modern website for Pakuvie, a transport service. Built with Next.js and React. You can check all service details on https://www.pakuvie.fi/.",
+    project9Title: "Mediasata",
+    project9Desc: "A modern and accessible website for Mediasata, a digital marketing and web agency. Built with Next.js and React. See more at https://www.mediasata.fi/.",
   },
   fi: {
     nav_home: "Etusivu",
@@ -98,6 +100,8 @@ const translations = {
     project7Desc: "Siivouspalveluiden verkkosivusto, Toteuttettu Next.js:llä ja TypeScriptillä. Sivusto esittelee siivouspalveluita, hinnoittelua ja yhteystietoja. Isännöity Vercelissä.",
     project8Title: "Pakuvie",
     project8Desc: "Moderni verkkosivusto Pakuvielle, joka on kuljetuspalvelu. Sivusto on rakennettu Next.js:llä ja Reactilla. Kaikki palvelutiedot voit tarkistaa https://www.pakuvie.fi/ -sivulta.",
+    project9Title: "Mediasata",
+    project9Desc: "Moderni ja saavutettava verkkosivusto Mediasatalle, joka on digitaalisen markkinoinnin ja verkkosivujen asiantuntijayritys. Rakennettu Next.js:llä ja Reactilla. Katso lisää: https://www.mediasata.fi/.",
   }
 };
 
@@ -111,11 +115,12 @@ function Portfolio() {
 
   const t = translations[language];
 
-  const projects: Array<{ title: string; description: string; Icon: LucideIcon; gradient: string; iconColor: string; link: string }> = [
-    { title: t.project2Title, description: t.project2Desc, Icon: Heart, gradient: "from-emerald-100 to-green-200 dark:from-emerald-900/40 dark:to-green-800/40", iconColor: "text-green-600 dark:text-green-400", link: "https://www.eevakoskela.fi/" },
-    { title: t.project3Title, description: t.project3Desc, Icon: Wrench, gradient: "from-orange-100 to-amber-200 dark:from-orange-900/40 dark:to-amber-800/40", iconColor: "text-orange-600 dark:text-orange-400", link: "https://www.hitservice.fi/" },
-    { title: t.project7Title, description: t.project7Desc, Icon: Sparkles, gradient: "from-sky-100 to-blue-200 dark:from-sky-900/40 dark:to-blue-800/40", iconColor: "text-sky-600 dark:text-sky-400", link: "https://www.siivousote.fi/" },
-    { title: t.project8Title, description: t.project8Desc, Icon: Truck, gradient: "from-indigo-100 to-violet-200 dark:from-indigo-900/40 dark:to-violet-800/40", iconColor: "text-indigo-600 dark:text-indigo-400", link: "https://www.pakuvie.fi/" },
+  const projects: Array<{ title: string; description: string; image?: string; Icon?: LucideIcon; iconColor?: string; link: string }> = [
+    { title: t.project2Title, description: t.project2Desc, Icon: Heart, iconColor: "text-green-600 dark:text-green-400", link: "https://www.eevakoskela.fi/" },
+    { title: t.project3Title, description: t.project3Desc, Icon: Wrench, iconColor: "text-orange-600 dark:text-orange-400", link: "https://www.hitservice.fi/" },
+    { title: t.project7Title, description: t.project7Desc, Icon: Sparkles, iconColor: "text-sky-600 dark:text-sky-400", link: "https://www.siivousote.fi/" },
+    { title: t.project8Title, description: t.project8Desc, Icon: Truck, iconColor: "text-indigo-600 dark:text-indigo-400", link: "https://www.pakuvie.fi/" },
+    { title: t.project9Title, description: t.project9Desc, image: "/media.png", link: "https://www.mediasata.fi/" },
   ];
 
   const sections = useMemo(() => ["hero", "about", "skills", "projects", "contact"], []);
@@ -442,7 +447,6 @@ function Portfolio() {
             <h3 className="text-gray-900 dark:text-white font-semibold mb-3">{t.frontendTech}</h3>
             <div className="flex flex-wrap gap-2">
               {["HTML", "CSS", "Tailwind CSS", "JavaScript", "TypeScript", "React", "Next.js"].map((skill, i) => {
-                const isPrimary = ["JavaScript", "TypeScript", "React", "Next.js"].includes(skill);
                 return (
                   <motion.span
                     key={skill}
@@ -451,11 +455,7 @@ function Portfolio() {
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.05 }}
                     whileHover={{ scale: 1.1 }}
-                    className={`px-3 py-1.5 rounded-full text-sm sm:text-base transition-all cursor-default ${
-                      isPrimary
-                        ? "bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-800 font-semibold text-blue-900 dark:text-blue-200"
-                        : "bg-gray-100 dark:bg-gray-800"
-                    }`}
+                    className="px-3 py-1.5 rounded-full text-sm sm:text-base transition-all cursor-default bg-gray-100 dark:bg-gray-800"
                   >
                     {skill}
                   </motion.span>
@@ -474,7 +474,6 @@ function Portfolio() {
             <h3 className="text-gray-900 dark:text-white font-semibold mb-3">{t.backendTech}</h3>
             <div className="flex flex-wrap gap-2">
               {["PHP", "C#", "Docker", "Python", "Node.js", "Drupal", "Laravel", "Express", "Flask"].map((skill, i) => {
-                const isPrimary = ["Node.js"].includes(skill);
                 return (
                   <motion.span
                     key={skill}
@@ -483,11 +482,7 @@ function Portfolio() {
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.05 }}
                     whileHover={{ scale: 1.1 }}
-                    className={`px-3 py-1.5 rounded-full text-sm sm:text-base transition-all cursor-default ${
-                      isPrimary
-                        ? "bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-800 font-semibold text-blue-900 dark:text-blue-200"
-                        : "bg-gray-100 dark:bg-gray-800"
-                    }`}
+                    className="px-3 py-1.5 rounded-full text-sm sm:text-base transition-all cursor-default bg-gray-100 dark:bg-gray-800"
                   >
                     {skill}
                   </motion.span>
@@ -506,7 +501,6 @@ function Portfolio() {
             <h3 className="text-gray-900 dark:text-white font-semibold mb-3">{t.databases}</h3>
             <div className="flex flex-wrap gap-2">
               {["MySQL", "MongoDB", "PostgreSQL", "Supabase"].map((skill, i) => {
-                const isPrimary = ["PostgreSQL"].includes(skill);
                 return (
                   <motion.span
                     key={skill}
@@ -515,11 +509,7 @@ function Portfolio() {
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.05 }}
                     whileHover={{ scale: 1.1 }}
-                    className={`px-3 py-1.5 rounded-full text-sm sm:text-base transition-all cursor-default ${
-                      isPrimary
-                        ? "bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-800 font-semibold text-blue-900 dark:text-blue-200"
-                        : "bg-gray-100 dark:bg-gray-800"
-                    }`}
+                    className="px-3 py-1.5 rounded-full text-sm sm:text-base transition-all cursor-default bg-gray-100 dark:bg-gray-800"
                   >
                     {skill}
                   </motion.span>
@@ -610,8 +600,12 @@ function Portfolio() {
           >
             <div className="flex flex-col justify-center items-center gap-6 sm:gap-8">
               
-              <div className={`flex items-center justify-center w-48 h-32 sm:w-64 sm:h-40 lg:w-80 lg:h-52 overflow-hidden rounded-2xl bg-gradient-to-br ${projects[currentProject].gradient}`}>
-                <CurrentProjectIcon size={72} className={projects[currentProject].iconColor} />
+              <div className="flex items-center justify-center w-48 h-32 sm:w-64 sm:h-40 lg:w-80 lg:h-52 overflow-hidden rounded-2xl bg-gray-100 dark:bg-gray-800">
+                {projects[currentProject].image ? (
+                  <Image src={projects[currentProject].image} alt={projects[currentProject].title} width={320} height={160} className="object-contain w-full h-full" />
+                ) : (
+                  <CurrentProjectIcon size={72} className={projects[currentProject].iconColor} />
+                )}
               </div>
 
               <h3 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-900 dark:text-white">
