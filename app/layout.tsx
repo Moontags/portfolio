@@ -1,5 +1,14 @@
 "use client";
 import { ThemeProvider } from "next-themes";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Mediasata – Verkkosivut jotka toimivat",
+  icons: {
+    icon: "/icon.png",
+    apple: "/apple-icon.png",
+  },
+};
 // import Header from "@/components/Header";
 import "./globals.css";
 import { LanguageProvider } from "@/contexts/LanguageContext";
