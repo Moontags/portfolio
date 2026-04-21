@@ -51,6 +51,8 @@ const translations = {
     project6Desc: "A task management application built with Next.js. This project showcases the ability to create, edit, and delete tasks, demonstrating fundamental CRUD operations.",
     project7Title: "Cleaning",
     project7Desc: "Cleaning Services Website, Implemented with Next.js and TypeScript. The site showcases cleaning services, pricing, and contact information. Hosted on Vercel.",
+    project8Title: "Pakuvie",
+    project8Desc: "A modern website for Pakuvie, a transport service. Built with Next.js and React. You can check all service details on https://www.pakuvie.fi/.",
   },
   fi: {
     nav_home: "Etusivu",
@@ -94,6 +96,8 @@ const translations = {
     // project6Desc: "Tehtävienhallintasovellus rakennettu Next.js:llä. Tämä projekti esittelee kykyä luoda, muokata ja poistaa tehtäviä, osoittaen perus CRUD-operaatiot.",
     project7Title: "Siivous",
     project7Desc: "Siivouspalveluiden verkkosivusto, Toteuttettu Next.js:llä ja TypeScriptillä. Sivusto esittelee siivouspalveluita, hinnoittelua ja yhteystietoja. Isännöity Vercelissä.",
+    project8Title: "Pakuvie",
+    project8Desc: "Moderni verkkosivusto Pakuvielle, joka on kuljetuspalvelu. Sivusto on rakennettu Next.js:llä ja Reactilla. Kaikki palvelutiedot voit tarkistaa https://www.pakuvie.fi/ -sivulta.",
   }
 };
 
@@ -111,10 +115,8 @@ function Portfolio() {
     // { title: t.project1Title, description: t.project1Desc, image: "🎯", link: "https://taitaja.vercel.app/" },
     { title: t.project2Title, description: t.project2Desc, image: "🌿", link: "https://www.eevakoskela.fi/" },
     { title: t.project3Title, description: t.project3Desc, image: "🎯", link: "https://www.hitservice.fi/" },
-    // { title: t.project4Title, description: t.project4Desc, image: "🏞️", link: "https://moontags.github.io/Finnish_Lakes-_Gallery/" },
-    // { title: t.project5Title, description: t.project5Desc, image: "🌤️", link: "https://moontags.github.io/Weather_App/" },
-    // { title: t.project6Title, description: t.project6Desc, image: "✅", link: "https://todo-lake-nine-41.vercel.app/" },
     { title: t.project7Title, description: t.project7Desc, image: "✅", link: "https://www.siivousote.fi/" },
+    { title: t.project8Title, description: t.project8Desc, image: "🚐", link: "https://www.pakuvie.fi/" },
   ];
 
   const sections = useMemo(() => ["hero", "about", "skills", "projects", "contact"], []);
@@ -583,7 +585,7 @@ function Portfolio() {
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="relative flex flex-col items-center text-gray-600 dark:text-gray-400 p-6 sm:p-8 max-w-3xl w-full mx-auto text-center bg-white/50 dark:bg-black/20 backdrop-blur-sm rounded-3xl shadow-xl"
+            className="relative flex flex-col items-center text-gray-600 dark:text-gray-400 p-6 sm:p-8 max-w-3xl w-full mx-auto text-center bg-white/50 dark:bg-black/20 backdrop-blur-sm rounded-3xl"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
