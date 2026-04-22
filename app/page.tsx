@@ -604,7 +604,9 @@ function Portfolio() {
                 {projects[currentProject].image ? (
                   <Image src={projects[currentProject].image} alt={projects[currentProject].title} width={320} height={160} className="object-contain w-full h-full" />
                 ) : (
-                  <CurrentProjectIcon size={72} className={projects[currentProject].iconColor} />
+                  CurrentProjectIcon ? (
+                    <CurrentProjectIcon size={72} className={projects[currentProject].iconColor} />
+                  ) : null
                 )}
               </div>
 

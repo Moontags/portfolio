@@ -4,8 +4,8 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Mediasata – Verkkosivut jotka toimivat",
   icons: {
-    icon: "/icon.png",
-    apple: "/apple-icon.png",
+    icon: "/media.png", // Use a valid PNG from public/
+    apple: "/media.png", // Use a valid PNG from public/
   },
 };
 // import Header from "@/components/Header";
